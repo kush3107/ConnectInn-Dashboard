@@ -3,7 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Utils} from "../utils";
 import {MatSnackBar} from "@angular/material";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class ConnectInnService {
   private BASE_URL = environment.apiBaseURL;
 

@@ -1,13 +1,13 @@
 import {Component} from "@angular/core";
 
 @Component({
-  selector: 'ci-app-root',
+  selector: 'ci-login',
   template: `
-    <router-outlet></router-outlet>
+    <h1>Login Component</h1>
   `,
   styles: []
 })
 
-export class AppComponent {
+export class LoginComponent {
 
 }

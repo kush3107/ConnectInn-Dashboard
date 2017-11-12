@@ -4,18 +4,29 @@ import {AppComponent} from "./containers/app.component";
 import {HttpModule} from "@angular/http";
 import {HttpClientModule} from "@angular/common/http";
 import {MaterialModule} from "./material.module";
+import {LoginComponent} from "./components/login";
+import {RouterModule} from "@angular/router";
+import {routes} from "./routes";
+import {AnonymousGuard} from "./guards/anonymous";
+import {ConnectInnService} from "./services/connect-inn";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule,
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    AnonymousGuard,
+    ConnectInnService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
