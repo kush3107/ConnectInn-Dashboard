@@ -21,24 +21,24 @@ export class BootstrapGuard implements CanActivate {
     }
 
     // const observables = Observable.combineLatest(
-      // this.store.select(isLoggedIn),
-      // this.store.select(getAppIsBootstrapped),
-      // (isLoggedIn, isBootstrapped) => {
-      //   return {
-      //     isLoggedIn: isLoggedIn,
-      //     isBootstrapped: isBootstrapped
-      //   };
-      // }
+    //   // this.store.select(isLoggedIn),
+    //   // this.store.select(getAppIsBootstrapped),
+    //   // (isLoggedIn, isBootstrapped) => {
+    //   //   return {
+    //   //     isLoggedIn: isLoggedIn,
+    //   //     isBootstrapped: isBootstrapped
+    //   //   };
+    //   // }
     // );
-
+    //
     // return observables.map((data) => {
     //   if (data.isLoggedIn && data.isBootstrapped) {
     //     // return this.store.select(getAppLandingUrl).subscribe((value) => {
     //     //   this.router.navigate([value]);
     //     // });
     //   }
-
-      // return !data.isBootstrapped;
+    //
+    //   return !data.isBootstrapped;
     // });
   }
 }
