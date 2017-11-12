@@ -9,11 +9,13 @@ import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
 import {AnonymousGuard} from "./guards/anonymous";
 import {ConnectInnService} from "./services/connect-inn";
+import {RegisterComponent} from "./components/register";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

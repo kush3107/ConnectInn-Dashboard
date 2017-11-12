@@ -1,15 +1,16 @@
 import {Routes} from "@angular/router";
 import {AnonymousGuard} from "./guards/anonymous";
 import {LoginComponent} from "./components/login";
+import {RegisterComponent} from "./components/register";
 
 export const routes: Routes = [
   {
     path: '',
     canActivate: [AnonymousGuard],
     children: [
-      // {
-      //   path: 'signup', component: SignUpComponent
-      // },
+      {
+        path: 'register', component: RegisterComponent
+      },
       {
         path: 'login', component: LoginComponent
       },
