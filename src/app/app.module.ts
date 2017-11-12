@@ -10,6 +10,12 @@ import {routes} from "./routes";
 import {AnonymousGuard} from "./guards/anonymous";
 import {ConnectInnService} from "./services/connect-inn";
 import {RegisterComponent} from "./components/register";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BootstrapGuard} from "./guards/bootstrap";
+import {StoreModule} from "@ngrx/store";
+import {reducer} from "./reducers/index";
+import {AlertService} from "./services/alert";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -19,15 +25,21 @@ import {RegisterComponent} from "./components/register";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
     MaterialModule,
+    FormsModule,
     RouterModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    StoreModule.provideStore(reducer),
   ],
   providers: [
+    ConnectInnService,
+    AlertService,
     AnonymousGuard,
-    ConnectInnService
+    BootstrapGuard
   ],
   bootstrap: [AppComponent]
 })

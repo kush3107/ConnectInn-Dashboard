@@ -78,7 +78,7 @@ export function reducer(state: any, action: any) {
 
 
 export const getAppState = (state: State) => state.app;
-
+export const getUserState = (state: State) => state.user;
 
 /**
  * All the selectors from app state
@@ -86,3 +86,11 @@ export const getAppState = (state: State) => state.app;
 export const getAppLandingUrl = createSelector(getAppState, fromApp.getLandingUrl);
 export const getAppIsBootstrapped = createSelector(getAppState, fromApp.getIsBootstrapped);
 export const getAppIsMenuHidden = createSelector(getAppState, fromApp.getIsMenuHidden);
+
+/**
+ * All the selectors from user state
+ */
+export const getUser = createSelector(getUserState, fromUser.getUser);
+export const isLoggingIn = createSelector(getUserState, fromUser.isLoggingIn);
+export const isLoggedIn = createSelector(getUserState, fromUser.isLoggedIn);
+export const isUserUpdating = createSelector(getUserState, fromUser.isUpdating);
