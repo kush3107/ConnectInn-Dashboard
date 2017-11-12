@@ -3,7 +3,6 @@
     "node_modules/codelyzer"
   ],
   "rules": {
-    "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
     "comment-format": [
@@ -26,7 +25,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      140
+      500
     ],
     "member-access": false,
     "member-ordering": [
@@ -46,28 +45,24 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-duplicate-super": true,
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
-    "no-misused-new": true,
-    "no-non-null-assertion": true,
-    "no-shadowed-variable": true,
+    "no-shadowed-variable": false,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
-    "no-unnecessary-initializer": true,
+    "no-trailing-whitespace": false,
     "no-unused-expression": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
-      true,
+      false,
       "check-open-brace",
       "check-catch",
       "check-else",
@@ -75,7 +70,7 @@
     ],
     "prefer-const": true,
     "quotemark": [
-      true,
+      false,
       "single"
     ],
     "radix": true,
@@ -100,7 +95,7 @@
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
-      true,
+      false,
       "check-branch",
       "check-decl",
       "check-operator",
@@ -110,13 +105,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "sd",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "sd",
       "kebab-case"
     ],
     "use-input-property-decorator": true,
