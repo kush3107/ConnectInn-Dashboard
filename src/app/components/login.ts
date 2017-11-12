@@ -9,7 +9,7 @@ import {AlertService} from "../services/alert";
   selector: 'ci-login', template: `
     <div class="overlay" fxLayoutAlign="center center">
       <div fxLayout="column" fxFlex="450px" fxFlex.xs="90%" fxLayoutGap="20px">
-        <img width="100%" src="/assets/images/logo-full.png">
+        <img width="100%" src="/assets/images/background.png">
         <mat-card fxFlex="100%">
           <h1>Login</h1>
           <form fxLayout="column" fxLayoutAlign="center stretch"

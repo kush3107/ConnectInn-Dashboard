@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
 
-  apiBaseURL: 'http://api.connectinn.tk/api/'
+  apiBaseURL: 'http://api.connectinn.tk/api'
 };
