@@ -105,13 +105,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "sd",
+      "ci",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "sd",
+      "ci",
       "kebab-case"
     ],
     "use-input-property-decorator": true,
