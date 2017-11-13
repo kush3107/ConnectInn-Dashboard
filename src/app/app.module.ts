@@ -33,7 +33,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     RouterModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    StoreModule.provideStore(reducer),
+    StoreModule.forRoot(reducer),
   ],
   providers: [
     ConnectInnService,

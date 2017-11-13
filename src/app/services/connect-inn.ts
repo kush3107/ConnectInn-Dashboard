@@ -6,11 +6,12 @@ import {MatSnackBar} from "@angular/material";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {User} from "../models/user";
-import 'rxjs';
 import {isUndefined} from "util";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
 import {LoginRequestAction, LoginSuccessAction} from "../actions/user";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
 
 @Injectable()
 export class ConnectInnService {
