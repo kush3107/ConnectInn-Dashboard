@@ -1,6 +1,6 @@
 import {User} from "../models/user";
-import {Action} from "@ngrx/store";
 import {LOGIN_REQUEST, LOGIN_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS} from "../actions/user";
+import {ActionWithPayload} from "../utils";
 
 export interface State {
   user: User;
@@ -16,7 +16,7 @@ export const initialState: State = {
   updating: false
 };
 
-export function reducer(state = initialState, action: Action): State {
+export function reducer(state = initialState, action: ActionWithPayload): State {
   switch (action.type) {
     case LOGIN_REQUEST: {
       return Object.assign({}, state, {loggingIn: true});

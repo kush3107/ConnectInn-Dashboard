@@ -57,7 +57,8 @@ export interface State {
 
 const reducers = {
   user: fromUser.reducer,
-  activity: fromActivity.reducer
+  activity: fromActivity.reducer,
+  app: fromApp.reducer
 };
 
 

@@ -1,5 +1,6 @@
 import {APP_LANDING_URL} from "../actions/app";
-import {Action} from "@ngrx/store";
+import {APP_BOOTSTRAPPED} from "../actions/index";
+import {ActionWithPayload} from "../utils";
 
 export interface State {
   landing_url: string;
@@ -15,14 +16,14 @@ export const initialState: State = {
   isMenuHidden: false,
 };
 
-export function reducer(state = initialState, action: Action): State {
+export function reducer(state = initialState, action: ActionWithPayload): State {
   switch (action.type) {
     case APP_LANDING_URL: {
       return Object.assign({}, state, {landing_url: action.payload, landing_url_overridden: true});
     }
-    // case APP_BOOTSTRAPPED: {
-    //   return Object.assign({}, state, {is_bootstrapped: true});
-    // }
+    case APP_BOOTSTRAPPED: {
+      return Object.assign({}, state, {is_bootstrapped: true});
+    }
     //
     // case APP_IS_MENU_HIDDEN: {
     //   return Object.assign({}, state, {isMenuHidden: !state.isMenuHidden});

@@ -4,7 +4,7 @@ import {Store} from "@ngrx/store";
 import {inject} from "@angular/core/testing";
 import {Injectable} from "@angular/core";
 import {getAppIsBootstrapped, getAppLandingUrl, isLoggedIn, State} from "../reducers/index";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class BootstrapGuard implements CanActivate {

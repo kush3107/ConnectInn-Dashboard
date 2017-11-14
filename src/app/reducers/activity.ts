@@ -1,9 +1,8 @@
 import {Activity} from "../models/activity";
-import {Action} from "@ngrx/store";
 import {
   ActivityIndexRequestAction, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS
 } from "../actions/activity";
-import {Utils} from "../utils";
+import {ActionWithPayload, Utils} from "../utils";
 
 export interface State {
   ids: number[];
@@ -19,7 +18,7 @@ export const initialState: State = {
   loaded: false
 };
 
-export function reducer(state = initialState, action: Action): State {
+export function reducer(state = initialState, action: ActionWithPayload): State {
   switch (action.type) {
     case INDEX_REQUEST: {
       return Object.assign({}, state, {loading: true});

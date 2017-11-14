@@ -1,4 +1,5 @@
 import {URLSearchParams} from '@angular/http';
+import {Action} from "@ngrx/store";
 
 export class Utils {
   static objToSearchParams(obj): URLSearchParams {
@@ -80,4 +81,8 @@ export class Utils {
 
 interface Entity {
   id: number;
+}
+
+export interface ActionWithPayload extends Action {
+  payload?: any;
 }
