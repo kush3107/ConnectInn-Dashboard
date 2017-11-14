@@ -1,26 +1,24 @@
 import {ActivatedRouteSnapshot, CanActivate, Router} from "@angular/router";
 import {ConnectInnService} from "../services/connect-inn";
 import {Store} from "@ngrx/store";
-import {inject} from "@angular/core/testing";
 import {Injectable} from "@angular/core";
 import {getAppIsBootstrapped, getAppLandingUrl, isLoggedIn, State} from "../reducers/index";
-import {Observable} from "rxjs/Observable";
+import Rx from 'rxjs/Rx';
 
 @Injectable()
 export class BootstrapGuard implements CanActivate {
   constructor(private router: Router,
-              private service: ConnectInnService,
               private store: Store<State>) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot): boolean | Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot): boolean | Rx.Observable<boolean> {
 
     if (!ConnectInnService.hasLoginToken()) {
       this.router.navigate(['/login']);
       return false;
     }
 
-    const observables = Observable.combineLatest(
+    const observables = Rx.Observable.combineLatest(
       this.store.select(isLoggedIn),
       this.store.select(getAppIsBootstrapped),
       (isLoggedIn, isBootstrapped) => {
