@@ -11,7 +11,7 @@ export class AnonymousGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['/home']);
+    this.router.navigate(['/feed']);
     return false;
   }
 }
