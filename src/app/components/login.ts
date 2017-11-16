@@ -9,7 +9,7 @@ import {AlertService} from "../services/alert";
   selector: 'ci-login', template: `
     <div class="overlay" fxLayoutAlign="center center">
       <div fxLayout="column" fxFlex="450px" fxFlex.xs="90%" fxLayoutGap="20px">
-        <img width="100%" src="/assets/images/background.png">
+        <!--<img width="100%" src="/assets/images/background.png">-->
         <mat-card fxFlex="100%">
           <h1>Login</h1>
           <form fxLayout="column" fxLayoutAlign="center stretch"
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
 
     this.connectInnService.login(this.loginForm.value).subscribe((response) => {
       this.loading = false;
-      this.router.navigate(['/home']);
+      this.router.navigate(['/feed']);
     }, (error) => {
       if (error.code === 22) {
         // this.dialog.open(ResendConfirmationComponent, ({

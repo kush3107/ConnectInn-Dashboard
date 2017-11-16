@@ -20,14 +20,21 @@ import {BootstrapComponent} from "./containers/bootstrap";
 import {CentreSpinnerComponent} from "./components/custom/center-spinner";
 import {ErrorComponent} from "./components/custom/error";
 import {LogoutComponent} from "./components/logout";
+import {DashboardComponent} from "./containers/dashboard";
+import {NotFoundComponent} from "./components/not-found";
+import {FeedComponent} from "./components/feed";
+import {AuthGuard} from "./guards/auth";
 
 @NgModule({
   declarations: [
     AppComponent,
+    FeedComponent,
     ErrorComponent,
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
+    NotFoundComponent,
+    DashboardComponent,
     BootstrapComponent,
     CentreSpinnerComponent
   ],
@@ -47,7 +54,8 @@ import {LogoutComponent} from "./components/logout";
     ConnectInnService,
     AlertService,
     AnonymousGuard,
-    BootstrapGuard
+    BootstrapGuard,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

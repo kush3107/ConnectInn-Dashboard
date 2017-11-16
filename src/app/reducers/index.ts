@@ -1,4 +1,3 @@
-
 import {ActionReducer} from '@ngrx/store';
 import {environment} from '../../environments/environment';
 
@@ -44,7 +43,6 @@ import {createSelector} from "reselect";
 
 
 import {APP_STATE_RESET} from '../actions/index';
-import {LOGOUT_ACTION} from "../actions/user";
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means

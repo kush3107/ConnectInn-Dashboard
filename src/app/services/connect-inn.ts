@@ -10,7 +10,7 @@ import {isUndefined} from "util";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
 import {
-  LoginRequestAction, LoginSuccessAction, LogoutAction, UpdateRequestAction,
+  LoginRequestAction, LoginSuccessAction, UpdateRequestAction,
   UpdateSuccessAction
 } from "../actions/user";
 import "rxjs/add/operator/map";
