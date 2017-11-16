@@ -16,12 +16,18 @@ import {StoreModule} from "@ngrx/store";
 import {reducer} from "./reducers/index";
 import {AlertService} from "./services/alert";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BootstrapComponent} from "./containers/bootstrap";
+import {CentreSpinnerComponent} from "./components/custom/center-spinner";
+import {ErrorComponent} from "./components/custom/error";
 
 @NgModule({
   declarations: [
     AppComponent,
+    ErrorComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BootstrapComponent,
+    CentreSpinnerComponent
   ],
   imports: [
     BrowserModule,
