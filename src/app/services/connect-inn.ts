@@ -12,6 +12,7 @@ import {State} from "../reducers/index";
 import {LoginRequestAction, LoginSuccessAction} from "../actions/user";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
+import * as fromUser from '../actions/user';
 
 @Injectable()
 export class ConnectInnService {
@@ -111,6 +112,17 @@ export class ConnectInnService {
       this.store.dispatch(new LoginSuccessAction(userObject));
       return userObject;
     }).catch(err => this.handleError(err));
+  }
+
+  me(): Observable<User> {
+    return this.get('/me').map(res => {
+      const user = res.json().data;
+      const userObject = Object.assign(new User(), user);
+
+      this.store.dispatch(new fromUser.UpdateSuccessAction(userObject));
+
+      return userObject;
+    }).catch((error) => this.handleError(error));
   }
 
   // register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {

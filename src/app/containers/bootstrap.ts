@@ -36,7 +36,7 @@ export class BootstrapComponent implements OnInit, OnDestroy{
   }
 
   private loadBootstrapData() {
-    // this.service.me().takeWhile(() => this.isAlive).subscribe();
+    this.service.me().takeWhile(() => this.isAlive).subscribe();
 
     this.store.select(isLoggedIn).takeWhile(() => this.isAlive).subscribe((loggedIn) => {
       this.isUserLoaded = loggedIn;
@@ -46,24 +46,14 @@ export class BootstrapComponent implements OnInit, OnDestroy{
       this.user = user;
     });
 
-    // this.store.select(getIsListingsLoaded).takeWhile(() => this.isAlive).subscribe((listingsLoaded) => {
-    //   this.isListingsLoaded = listingsLoaded;
-    // });
-
-    // this.store.select(getIsAdminLoaded).takeWhile(() => this.isAlive).subscribe((adminsLoaded) => {
-    //   this.isAdminsLoaded = adminsLoaded;
-    // });
-
     const bootstrap = Observable.merge(
       this.store.select(isLoggedIn),
-      // this.store.select(getIsListingsLoaded),
-      // this.store.select(getIsAdminLoaded),
       (loggedIn) => ({})
     );
 
     bootstrap.takeWhile(() => this.isAlive).subscribe(
       (data) => {
-        if (this.isListingsLoaded && this.isUserLoaded && this.isAdminsLoaded) {
+        if (this.isUserLoaded) {
           return this.store.select(getAppLandingUrl).takeWhile(() => this.isAlive).subscribe((value) => {
             this.store.dispatch(new AppBootstrapSuccessAction());
 
