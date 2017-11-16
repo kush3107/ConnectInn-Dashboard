@@ -3,7 +3,8 @@ import {ConnectInnService} from "../services/connect-inn";
 import {Store} from "@ngrx/store";
 import {Injectable} from "@angular/core";
 import {getAppIsBootstrapped, getAppLandingUrl, isLoggedIn, State} from "../reducers/index";
-import {Rx} from 'rxjs/Rx';
+import 'rxjs';
+import * as Rx from 'rxjs/Rx';
 
 @Injectable()
 export class BootstrapGuard implements CanActivate {

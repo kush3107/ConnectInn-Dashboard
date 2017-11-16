@@ -9,10 +9,11 @@ import {User} from "../models/user";
 import {isUndefined} from "util";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
-import {LoginRequestAction, LoginSuccessAction} from "../actions/user";
+import {LoginRequestAction, LoginSuccessAction, UpdateRequestAction, UpdateSuccessAction} from "../actions/user";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import * as fromUser from '../actions/user';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class ConnectInnService {
@@ -22,7 +23,7 @@ export class ConnectInnService {
     return !!localStorage.getItem('auth_token');
   }
 
-  constructor(private http: Http, private httpClient: HttpClient, private snackBar: MatSnackBar, private store: Store<State>) {
+  constructor(private http: Http, private httpClient: HttpClient, private snackBar: MatSnackBar, private store: Store<State>, private router: Router) {
   }
 
   private get(url: string, data?: any) {
@@ -72,35 +73,29 @@ export class ConnectInnService {
   }
 
   private handleError(error: Response): Observable<Error> {
-    console.log('[sd-error] start');
-    console.log(error);
-    console.log('[sd-error] end');
 
     if (error.status === 401) {
-      localStorage.removeItem('auth_token');
-      this.snackBar.open('Unauthorized', '', {
-        duration: 4000,
-      });
-      return Observable.throw({messages: ['Unauthorized'], error: null});
+      this.router.navigate(['/logout']);
+      return Observable.throw({message: 'Unauthorized access!', error: null});
     }
 
-    const errorObject = error.json();
-    const errorResponse = errorObject['errors'];
+    const errorResponse = error.json()['errors'];
+    const messageRes = error.json()['message'];
+    const errorCode = error.json()['code'];
 
-    const messages = [];
-
-    if (isUndefined(errorResponse)) {
-      messages.push(errorObject['message']);
-    } else {
-      if (typeof errorResponse === 'string') {
-        return Observable.throw({messages: [errorResponse], error: null});
-      } else {
-        for (const key in errorResponse) {
-          if (errorResponse.hasOwnProperty(key)) {
-            messages.push(errorResponse[key]);
-          }
+    if (typeof errorResponse === 'string') {
+      return Observable.throw({message: errorResponse, error: null});
+    } else if (errorResponse) {
+      let message: string;
+      for (const key in errorResponse) {
+        if (errorResponse.hasOwnProperty(key)) {
+          message = errorResponse[key];
+          break;
         }
       }
+      return Observable.throw({message: message, error: errorResponse, code: errorCode});
+    } else if (typeof messageRes === 'string') {
+      return Observable.throw({message: messageRes, error: null, code: errorCode});
     }
   }
 
@@ -125,9 +120,23 @@ export class ConnectInnService {
     }).catch((error) => this.handleError(error));
   }
 
-  // register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {
-  //   this.post('/register', data).map(res => {
-  //     const user =
-  //   });
-  // }
+  updateMe(data: any): Observable<User> {
+    this.store.dispatch(new UpdateRequestAction());
+
+    return this.put('/me', data).map(res => {
+      const user = res.json().data;
+      this.store.dispatch(new UpdateSuccessAction(user));
+
+      return user;
+    });
+  }
+
+  register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {
+    return this.post('/register', data).map(res => {
+      localStorage.setItem('auth_token', res.json().token);
+      const userObject = Object.assign(new User(), res.json().user);
+      this.store.dispatch(new LoginSuccessAction(userObject));
+      return userObject;
+    }).catch((error) => this.handleError(error));
+  }
 }
