@@ -19,12 +19,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BootstrapComponent} from "./containers/bootstrap";
 import {CentreSpinnerComponent} from "./components/custom/center-spinner";
 import {ErrorComponent} from "./components/custom/error";
+import {LogoutComponent} from "./components/logout";
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
     LoginComponent,
+    LogoutComponent,
     RegisterComponent,
     BootstrapComponent,
     CentreSpinnerComponent

@@ -1,5 +1,5 @@
 import {User} from "../models/user";
-import {LOGIN_REQUEST, LOGIN_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS} from "../actions/user";
+import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_ACTION, UPDATE_REQUEST, UPDATE_SUCCESS} from "../actions/user";
 import {ActionWithPayload} from "../utils";
 
 export interface State {

@@ -25,6 +25,7 @@ export class LoginSuccessAction implements Action {
   }
 }
 
+
 export class UpdateRequestAction implements Action {
   readonly type = UPDATE_REQUEST;
 }

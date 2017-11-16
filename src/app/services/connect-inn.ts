@@ -9,11 +9,15 @@ import {User} from "../models/user";
 import {isUndefined} from "util";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
-import {LoginRequestAction, LoginSuccessAction, UpdateRequestAction, UpdateSuccessAction} from "../actions/user";
+import {
+  LoginRequestAction, LoginSuccessAction, LogoutAction, UpdateRequestAction,
+  UpdateSuccessAction
+} from "../actions/user";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import * as fromUser from '../actions/user';
 import {Router} from "@angular/router";
+import {AppStateResetAction} from "../actions/index";
 
 @Injectable()
 export class ConnectInnService {
@@ -107,6 +111,11 @@ export class ConnectInnService {
       this.store.dispatch(new LoginSuccessAction(userObject));
       return userObject;
     }).catch(err => this.handleError(err));
+  }
+
+  logout() {
+    localStorage.clear();
+    this.store.dispatch(new AppStateResetAction());
   }
 
   me(): Observable<User> {
