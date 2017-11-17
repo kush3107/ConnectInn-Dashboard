@@ -32,9 +32,7 @@ export class BootstrapGuard implements CanActivate {
 
     return observables.map((data) => {
       if (data.isLoggedIn && data.isBootstrapped) {
-        return this.store.select(getAppLandingUrl).subscribe((value) => {
-          this.router.navigate([value]);
-        });
+        this.router.navigate(['/feed']);
       }
 
       return !data.isBootstrapped;
