@@ -3,7 +3,6 @@ import {ConnectInnService} from "../services/connect-inn";
 import {Store} from "@ngrx/store";
 import {Injectable} from "@angular/core";
 import {getAppIsBootstrapped, getAppLandingUrl, isLoggedIn, State} from "../reducers/index";
-import 'rxjs';
 import * as Rx from 'rxjs/Rx';
 
 @Injectable()
