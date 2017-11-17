@@ -1,6 +1,7 @@
 import {User} from "../models/user";
 import {LOGIN_REQUEST, LOGIN_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS} from "../actions/user";
 import {ActionWithPayload} from "../utils";
+import {APP_STATE_RESET} from "../actions/index";
 
 export interface State {
   user: User;
@@ -29,6 +30,9 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
     }
     case UPDATE_SUCCESS: {
       return Object.assign({}, state, {user: action.payload, updating: false, loggedIn: true});
+    }
+    case APP_STATE_RESET: {
+      return {...state, ...{user: null, loggedIn: false, loggingIn: false}};
     }
     default: {
       return state;

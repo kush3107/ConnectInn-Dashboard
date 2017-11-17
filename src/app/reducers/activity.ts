@@ -3,6 +3,7 @@ import {
   ActivityIndexRequestAction, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS
 } from "../actions/activity";
 import {ActionWithPayload, Utils} from "../utils";
+import {APP_STATE_RESET} from "../actions/index";
 
 export interface State {
   ids: number[];
