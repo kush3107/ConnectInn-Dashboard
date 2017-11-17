@@ -13,7 +13,6 @@ import {RegisterComponent} from "./components/register";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BootstrapGuard} from "./guards/bootstrap";
 import {StoreModule} from "@ngrx/store";
-import {reducer} from "./reducers/index";
 import {AlertService} from "./services/alert";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BootstrapComponent} from "./containers/bootstrap";
@@ -24,6 +23,7 @@ import {DashboardComponent} from "./containers/dashboard";
 import {NotFoundComponent} from "./components/not-found";
 import {FeedComponent} from "./components/feed";
 import {AuthGuard} from "./guards/auth";
+import {reducers} from './reducers/index';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import {AuthGuard} from "./guards/auth";
     RouterModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    StoreModule.forRoot(reducer),
+    StoreModule.forRoot(reducers),
   ],
   providers: [
     ConnectInnService,
