@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ConnectInnService} from "../services/connect-inn";
 import {MatSnackBar} from "@angular/material";
 import {AlertService} from "../services/alert";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ci-register',
@@ -73,7 +74,7 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
   signupForm: FormGroup;
 
-  constructor(private service: ConnectInnService, private alertService: AlertService) {
+  constructor(private service: ConnectInnService, private alertService: AlertService, private router: Router) {
 
   }
 
@@ -95,7 +96,7 @@ export class RegisterComponent implements OnInit {
       this.loading = true;
       this.service.register(data).subscribe(user => {
         this.loading = false;
-        this.alertService.success('Registered');
+          this.router.navigate(['/feed']);
       },
         err => {
         this.loading = false;
