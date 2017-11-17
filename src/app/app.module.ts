@@ -24,6 +24,8 @@ import {NotFoundComponent} from "./components/not-found";
 import {FeedComponent} from "./components/feed";
 import {AuthGuard} from "./guards/auth";
 import {reducers} from './reducers/index';
+import {HeaderComponent} from "./containers/header";
+import {LayoutMainComponent} from "./components/layouts/main-layout";
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {reducers} from './reducers/index';
     ErrorComponent,
     LoginComponent,
     LogoutComponent,
+    LayoutMainComponent,
+    HeaderComponent,
     RegisterComponent,
     NotFoundComponent,
     DashboardComponent,

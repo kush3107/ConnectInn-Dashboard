@@ -3,7 +3,9 @@ import {Component} from "@angular/core";
 @Component({
   selector: 'ci-feed',
   template: `
-    <h1>Feed Component</h1>
+    <ci-layout>
+      <router-outlet></router-outlet>
+    </ci-layout>
   `,
   styles: []
 })
