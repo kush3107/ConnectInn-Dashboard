@@ -38,7 +38,10 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
 
 export const getUser = (state: State) => state.user;
 
-export const isLoggedIn = (state: State) => state.loggedIn;
+export const isLoggedIn = (state: State) => {
+  console.log(state);
+  return state.loggedIn;
+};
 export const isLoggingIn = (state: State) => state.loggingIn;
 export const isUpdating = (state: State) => state.updating;
 

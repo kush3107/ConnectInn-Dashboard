@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {User} from '../models/user';
+import {ActionWithPayload} from "../utils";
 
 export const LOGIN_REQUEST = '[USER] login request';
 export const LOGIN_SUCCESS = '[USER] login successful';
@@ -14,11 +15,11 @@ export const UPDATE_SUCCESS = '[USER] update successful';
  *
  * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
-export class LoginRequestAction implements Action {
+export class LoginRequestAction implements ActionWithPayload {
   readonly type = LOGIN_REQUEST;
 }
 
-export class LoginSuccessAction implements Action {
+export class LoginSuccessAction implements ActionWithPayload {
   readonly type = LOGIN_SUCCESS;
 
   constructor(public payload: User) {
@@ -26,11 +27,11 @@ export class LoginSuccessAction implements Action {
 }
 
 
-export class UpdateRequestAction implements Action {
+export class UpdateRequestAction implements ActionWithPayload {
   readonly type = UPDATE_REQUEST;
 }
 
-export class UpdateSuccessAction implements Action {
+export class UpdateSuccessAction implements ActionWithPayload {
   readonly type = UPDATE_SUCCESS;
 
   constructor(public payload: User) {
