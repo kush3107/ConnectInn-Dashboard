@@ -19,8 +19,8 @@ import * as fromUser from '../actions/user';
 import {Router} from "@angular/router";
 import {AppStateResetAction} from "../actions/index";
 import {
-  ActivityCreateRequest, ActivityCreateSuccess, ActivityUpdateRequestAction,
-  ActivityUpdateSuccessAction
+  ActivityCreateRequest, ActivityCreateSuccess, ActivityIndexRequestAction, ActivityIndexSuccessAction,
+  ActivityUpdateRequestAction, ActivityUpdateSuccessAction
 } from "../actions/activity";
 import {Activity} from "../models/activity";
 
@@ -142,7 +142,17 @@ export class ConnectInnService {
       this.store.dispatch(new UpdateSuccessAction(user));
 
       return user;
-    });
+    }).catch(err => this.handleError(err));
+  }
+
+  listMyActivities(): Observable<Activity[] | {}> {
+    this.store.dispatch(new ActivityIndexRequestAction());
+    return this.get('/activities').map(res => {
+      const activities = res.json().data;
+      this.store.dispatch(new ActivityIndexSuccessAction(activities));
+
+      return activities;
+    }).catch(err => this.handleError(err));
   }
 
   createActivity(data: {title: string, description?: string, start: string, end?: string, type: string, link?: string, meta?; any}): Observable<Activity> {
@@ -152,7 +162,7 @@ export class ConnectInnService {
       this.store.dispatch(new ActivityCreateSuccess(activity));
 
       return activity;
-    })
+    }).catch(err => this.handleError(err));
   }
 
   updateActivity(activityId: number, data: {title?: string, description?: string, link?: string, meta?: any}): Observable<Activity> {
@@ -161,7 +171,7 @@ export class ConnectInnService {
       const activityObject = Object.assign(new Activity(), res.json().data);
       this.store.dispatch(new ActivityUpdateSuccessAction(activityObject));
       return activityObject;
-    })
+    }).catch(err => this.handleError(err));
   }
 
   register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {

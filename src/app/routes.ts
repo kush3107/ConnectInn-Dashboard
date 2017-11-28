@@ -9,6 +9,7 @@ import {NotFoundComponent} from "./components/not-found";
 import {DashboardComponent} from "./containers/dashboard";
 import {AuthGuard} from "./guards/auth";
 import {FeedComponent} from "./components/feed";
+import {MyActivitiesListComponent} from "./components/activities/my-activities";
 
 export const routes: Routes = [
   {path: '', component: BootstrapComponent, canActivate: [BootstrapGuard]},
@@ -19,6 +20,9 @@ export const routes: Routes = [
     children: [
       {
         path: 'feed', component: FeedComponent
+      },
+      {
+        path: 'my-activities', component: MyActivitiesListComponent
       }
     ]
   },

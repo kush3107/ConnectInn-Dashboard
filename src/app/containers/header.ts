@@ -12,7 +12,7 @@ import {ConnectInnService} from "../services/connect-inn";
       <div fxLayoutAlign="start center" fxFlex="100%">
         <!--<img width="60" class="logo" (click)="home()" src="/assets/images/logo.png">-->
         <button id="accounts_link" mat-button routerLink="/feed" routerLinkActive="selected">Home</button>
-        <button id="ctas_link" mat-button routerLink="/activities" routerLinkActive="selected">My Activities</button>
+        <button id="ctas_link" mat-button routerLink="/my-activities" routerLinkActive="selected">My Activities</button>
         <span fxFlex="1 1 auto"></span>
         
         <button mat-button type="button" [matMenuTriggerFor]="userSettingsMenu">

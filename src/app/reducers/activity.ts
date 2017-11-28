@@ -14,10 +14,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  ids: [],
-  entities: {},
-  loading: false,
-  loaded: false
+  ids: [], entities: {}, loading: false, loaded: false
 };
 
 export function reducer(state = initialState, action: ActionWithPayload): State {
@@ -31,10 +28,7 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
       const activitiesIds = activities.map(activity => activity.id);
       const entities = Utils.normalize(activities);
       return Object.assign({}, state, {
-        ids: activitiesIds,
-        loading: false,
-        loaded: true,
-        entities: entities
+        ids: activitiesIds, loading: false, loaded: true, entities: entities
       });
     }
 
@@ -47,10 +41,8 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
       const newActivityId = activity.id;
 
       return {
-        ...state,
-        entities: {
-          ...state.entities,
-          [newActivityId]: activity
+        ...state, entities: {
+          ...state.entities, [newActivityId]: activity
         }
       };
     }

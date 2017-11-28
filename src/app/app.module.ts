@@ -26,6 +26,7 @@ import {AuthGuard} from "./guards/auth";
 import {reducers} from './reducers/index';
 import {HeaderComponent} from "./containers/header";
 import {LayoutMainComponent} from "./components/layouts/main-layout";
+import {MyActivitiesListComponent} from "./components/activities/my-activities";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {LayoutMainComponent} from "./components/layouts/main-layout";
     NotFoundComponent,
     DashboardComponent,
     BootstrapComponent,
-    CentreSpinnerComponent
+    CentreSpinnerComponent,
+    MyActivitiesListComponent
   ],
   imports: [
     BrowserModule,
