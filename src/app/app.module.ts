@@ -27,6 +27,7 @@ import {reducers} from './reducers/index';
 import {HeaderComponent} from "./containers/header";
 import {LayoutMainComponent} from "./components/layouts/main-layout";
 import {MyActivitiesListComponent} from "./components/activities/my-activities";
+import {CreateActivityDialogComponent} from "./components/dialogs/activities/create-activity-dialog";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MyActivitiesListComponent} from "./components/activities/my-activities";
     DashboardComponent,
     BootstrapComponent,
     CentreSpinnerComponent,
-    MyActivitiesListComponent
+    MyActivitiesListComponent,
+    CreateActivityDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,9 @@ import {MyActivitiesListComponent} from "./components/activities/my-activities";
     AnonymousGuard,
     BootstrapGuard,
     AuthGuard
+  ],
+  entryComponents: [
+    CreateActivityDialogComponent
   ],
   bootstrap: [AppComponent]
 })
