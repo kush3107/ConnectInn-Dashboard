@@ -32,6 +32,7 @@ export const reducers = {
 
 export const getAppState = (state: State) => state.app;
 export const getUserState = (state: State) => state.user;
+export const getActivityState = (state: State) => state.activity;
 
 /**
  * All the selectors from app state
@@ -47,3 +48,7 @@ export const getUser = createSelector(getUserState, fromUser.getUser);
 export const isLoggingIn = createSelector(getUserState, fromUser.isLoggingIn);
 export const isLoggedIn = createSelector(getUserState, fromUser.isLoggedIn);
 export const isUserUpdating = createSelector(getUserState, fromUser.isUpdating);
+
+export const getMyActivities = createSelector(getActivityState, fromActivity.getActivities)
+export const getMyActivitiesLoading = createSelector(getActivityState, fromActivity.getLoading);
+export const getMyActivitiesLoaded = createSelector(getActivityState, fromActivity.getLoaded);

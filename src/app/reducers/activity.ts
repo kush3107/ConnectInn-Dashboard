@@ -4,7 +4,7 @@ import {
 } from "../actions/activity";
 import {ActionWithPayload, Utils} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
-import {init} from "protractor/built/launcher";
+import {createSelector} from "reselect";
 
 export interface State {
   ids: number[];
@@ -56,3 +56,9 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
     }
   }
 }
+
+export const getIds = (state: State) => state.ids;
+export const getEntities = (state: State) => state.entities;
+export const getActivities = createSelector(getIds, getEntities, (ids, entities) => ids.map((id) => entities[id]));
+export const getLoading = (state: State) => state.loading;
+export const getLoaded = (state: State) => state.loaded;
