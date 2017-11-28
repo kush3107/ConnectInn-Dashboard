@@ -18,6 +18,11 @@ import "rxjs/add/operator/catch";
 import * as fromUser from '../actions/user';
 import {Router} from "@angular/router";
 import {AppStateResetAction} from "../actions/index";
+import {
+  ActivityCreateRequest, ActivityCreateSuccess, ActivityUpdateRequestAction,
+  ActivityUpdateSuccessAction
+} from "../actions/activity";
+import {Activity} from "../models/activity";
 
 @Injectable()
 export class ConnectInnService {
@@ -138,6 +143,25 @@ export class ConnectInnService {
 
       return user;
     });
+  }
+
+  createActivity(data: {title: string, description?: string, start: string, end?: string, type: string, link?: string, meta?; any}): Observable<Activity> {
+    this.store.dispatch(new ActivityCreateRequest());
+    return this.post('/activities', data).map(res => {
+      const activity = Object.assign(new Activity(), res.json().data);
+      this.store.dispatch(new ActivityCreateSuccess(activity));
+
+      return activity;
+    })
+  }
+
+  updateActivity(activityId: number, data: {title?: string, description?: string, link?: string, meta?: any}): Observable<Activity> {
+    this.store.dispatch(new ActivityUpdateRequestAction());
+    return this.put('/activities' + activityId, data).map(res => {
+      const activityObject = Object.assign(new Activity(), res.json().data);
+      this.store.dispatch(new ActivityUpdateSuccessAction(activityObject));
+      return activityObject;
+    })
   }
 
   register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {
