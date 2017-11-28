@@ -4,6 +4,7 @@ import {
 } from "../actions/activity";
 import {ActionWithPayload, Utils} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
+import {init} from "protractor/built/launcher";
 
 export interface State {
   ids: number[];
@@ -52,6 +53,10 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
           [newActivityId]: activity
         }
       };
+    }
+
+    case APP_STATE_RESET: {
+      return {...initialState};
     }
 
     default: {

@@ -32,7 +32,7 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
       return Object.assign({}, state, {user: action.payload, updating: false, loggedIn: true});
     }
     case APP_STATE_RESET: {
-      return {...state, ...{user: null, loggedIn: false, loggingIn: false}};
+      return {...initialState};
     }
     default: {
       return state;
