@@ -8,8 +8,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .spinner {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 <body>
-  <ci-app-root></ci-app-root>
+  <ci-app-root>
+    <div class="overlay">
+      <object class="spinner"
+              type="image/svg+xml"
+              data="assets/images/loading.svg">
+      </object>
+    </div>
+  </ci-app-root>
 </body>
 </html>
