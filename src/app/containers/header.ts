@@ -24,7 +24,7 @@ import {ConnectInnService} from "../services/connect-inn";
     </mat-toolbar>
 
     <mat-menu [overlapTrigger]="false" #userSettingsMenu="matMenu">
-      <button mat-menu-item (click)="settingsButtonTapped()">Settings</button>
+      <button mat-menu-item (click)="profileButtonTapped()">Profile</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   `,
@@ -68,8 +68,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/feed']);
   }
 
-  settingsButtonTapped() {
-    this.router.navigate(['/settings']);
+  profileButtonTapped() {
+    this.router.navigate(['/profile']);
   }
 
   ngOnDestroy() {

@@ -10,6 +10,7 @@ import {DashboardComponent} from "./containers/dashboard";
 import {AuthGuard} from "./guards/auth";
 import {FeedComponent} from "./components/feed";
 import {MyActivitiesListComponent} from "./components/activities/my-activities";
+import {ProfileComponent} from "./components/profile";
 
 export const routes: Routes = [
   {path: '', component: BootstrapComponent, canActivate: [BootstrapGuard]},
@@ -23,6 +24,9 @@ export const routes: Routes = [
       },
       {
         path: 'my-activities', component: MyActivitiesListComponent
+      },
+      {
+        path: 'profile', component: ProfileComponent
       }
     ]
   },

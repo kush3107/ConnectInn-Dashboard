@@ -28,6 +28,7 @@ import {HeaderComponent} from "./containers/header";
 import {LayoutMainComponent} from "./components/layouts/main-layout";
 import {MyActivitiesListComponent} from "./components/activities/my-activities";
 import {CreateActivityDialogComponent} from "./components/dialogs/activities/create-activity-dialog";
+import {ProfileComponent} from "./components/profile";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {CreateActivityDialogComponent} from "./components/dialogs/activities/cre
     BootstrapComponent,
     CentreSpinnerComponent,
     MyActivitiesListComponent,
-    CreateActivityDialogComponent
+    CreateActivityDialogComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
