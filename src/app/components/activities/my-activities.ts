@@ -9,7 +9,7 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
 @Component({
   selector: 'ci-my-activites',
   template: `
-    <mat-spinner *ngIf="!loaded"></mat-spinner>
+    <ci-center-spinner *ngIf="!loaded"></ci-center-spinner>
     <p *ngFor="let a of activities">{{a.title}}</p>
     <button mat-raised-button (click)="openActivityDialog()">Create</button>
   `, styles: []
