@@ -7,6 +7,7 @@
 import * as fromUser from './user';
 import * as fromActivity from './activity';
 import * as fromApp from './app';
+import * as fromEducation from './education';
 import {createSelector} from "reselect";
 
 
@@ -20,12 +21,14 @@ export interface State {
   user: fromUser.State;
   activity: fromActivity.State;
   app: fromApp.State;
+  education: fromEducation.EducationState
 }
 
 export const reducers = {
   user: fromUser.reducer,
   activity: fromActivity.reducer,
-  app: fromApp.reducer
+  app: fromApp.reducer,
+  education: fromEducation.reducer
 };
 
 
@@ -33,6 +36,7 @@ export const reducers = {
 export const getAppState = (state: State) => state.app;
 export const getUserState = (state: State) => state.user;
 export const getActivityState = (state: State) => state.activity;
+export const getEducationState = (state: State) => state.education;
 
 /**
  * All the selectors from app state
@@ -49,6 +53,13 @@ export const isLoggingIn = createSelector(getUserState, fromUser.isLoggingIn);
 export const isLoggedIn = createSelector(getUserState, fromUser.isLoggedIn);
 export const isUserUpdating = createSelector(getUserState, fromUser.isUpdating);
 
-export const getMyActivities = createSelector(getActivityState, fromActivity.getActivities)
+// Activity Related selectors from activity state
+export const getMyActivities = createSelector(getActivityState, fromActivity.getActivities);
 export const getMyActivitiesLoading = createSelector(getActivityState, fromActivity.getLoading);
 export const getMyActivitiesLoaded = createSelector(getActivityState, fromActivity.getLoaded);
+
+export const getEducationIds = createSelector(getEducationState, fromEducation.getIds);
+export const getEducationEntities = createSelector(getEducationState, fromEducation.getEntities);
+export const getEducations = createSelector(getEducationState, fromEducation.getEducations);
+export const getEducationsLoaded = createSelector(getEducationState, fromEducation.getLoaded);
+export const getEducationsLoading = createSelector(getEducationState, fromEducation.getLoading);
