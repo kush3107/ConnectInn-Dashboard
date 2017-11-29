@@ -23,6 +23,11 @@ import {
   ActivityUpdateRequestAction, ActivityUpdateSuccessAction
 } from "../actions/activity";
 import {Activity} from "../models/activity";
+import {
+  EducationCreateRequest, EducationCreateSuccess, EducationDeleteRequestAction, EducationDeleteSuccessRequest,
+  EducationIndexRequestAction, EducationIndexSuccessAction, EducationUpdateRequestAction, EducationUpdateSuccessAction
+} from "../actions/education";
+import {Education} from "../models/education";
 
 @Injectable()
 export class ConnectInnService {
@@ -182,4 +187,45 @@ export class ConnectInnService {
       return userObject;
     }).catch((error) => this.handleError(error));
   }
+
+  listEducations(): Observable<Education[] | {}> {
+    this.store.dispatch(new EducationIndexRequestAction());
+    return this.get('/educations').map(res => {
+      const educations = res.json().data;
+
+      this.store.dispatch(new EducationIndexSuccessAction(educations));
+
+      return educations;
+    }).catch(err => this.handleError(err));
+  }
+
+  createEducation(data: {school: string, degree: string, grade: string, grade_type: string, start: string, end?: string, location?: string}): Observable<Education> {
+    this.store.dispatch(new EducationCreateRequest());
+    return this.post('/educations', data).map(res => {
+      const education = res.json().data;
+      this.store.dispatch(new EducationCreateSuccess(education));
+
+      return education;
+    }).catch(err => this.handleError(err));
+  }
+
+  updateEducation(educationId: number, data: {school?: string, degree?: string, grade?: string, grade_type?: string, start?: string, end?: string, location?: string}): Observable<Education> {
+    this.store.dispatch(new EducationUpdateRequestAction());
+    return this.put('/educations/' + educationId, data).map(res => {
+      const education = res.json().data;
+      this.store.dispatch(new EducationUpdateSuccessAction(education));
+
+      return education;
+    }).catch(err => this.handleError(err));
+  }
+
+  deleteEducation(educationId: number): Observable<number | {}> {
+    this.store.dispatch(new EducationDeleteRequestAction());
+    return this.delete('/educations/' + educationId).map(() => {
+      this.store.dispatch(new EducationDeleteSuccessRequest(educationId));
+
+      return educationId;
+    }).catch(err => this.handleError(err));
+  }
+
 }

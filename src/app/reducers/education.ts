@@ -2,7 +2,8 @@ import {Education} from "../models/education";
 import {ActionWithPayload, Utils} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
 import {
-  CREATE_REQUEST, CREATE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS
+  CREATE_REQUEST, CREATE_SUCCESS, DELETE_REQUEST, DELETE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST,
+  UPDATE_SUCCESS
 } from "../actions/education";
 import {createSelector} from "reselect";
 
@@ -61,6 +62,16 @@ export function reducer(state = initialState, action: ActionWithPayload): Educat
 
       return {...state, ...{entities: entities, loading: false, loaded: true}};
 
+    }
+    case DELETE_REQUEST: {
+      return {...state, ...{loading: true}};
+    }
+    case DELETE_SUCCESS: {
+      const id = action.payload;
+      const newIds = state.ids.filter(el => el !== id);
+      const newEntities = Utils.removeKey(state.entities, id);
+
+      return {...state, ...{entities: newEntities, ids: newIds, loading: false, loaded: true}};
     }
     case APP_STATE_RESET: {
       return {...initialState};
