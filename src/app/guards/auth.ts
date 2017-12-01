@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {getAppIsBootstrapped, getEducationsLoaded, getMyActivitiesLoaded, isLoggedIn, State} from '../reducers/index';
+import {getEducationsLoaded, getMyActivitiesLoaded, isLoggedIn, State} from '../reducers/index';
 import {Store} from '@ngrx/store';
 import {SetLandingUrlAction} from '../actions/app';
 import {ConnectInnService} from "../services/connect-inn";
