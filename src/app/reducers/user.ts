@@ -1,5 +1,7 @@
 import {User} from "../models/user";
-import {LOGIN_REQUEST, LOGIN_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS} from "../actions/user";
+import {
+  LOGIN_REQUEST, LOGIN_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS
+} from "../actions/user";
 import {ActionWithPayload} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
 
@@ -19,9 +21,11 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: ActionWithPayload): State {
   switch (action.type) {
+    case USER_PROFILE_REQUEST:
     case LOGIN_REQUEST: {
       return Object.assign({}, state, {loggingIn: true});
     }
+    case USER_PROFILE_SUCCESS:
     case LOGIN_SUCCESS: {
       return Object.assign({}, state, {user: action.payload, loggedIn: true, loggingIn: false});
     }

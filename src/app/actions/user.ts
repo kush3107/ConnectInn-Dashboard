@@ -4,6 +4,8 @@ import {ActionWithPayload} from "../utils";
 
 export const LOGIN_REQUEST = '[USER] login request';
 export const LOGIN_SUCCESS = '[USER] login successful';
+export const USER_PROFILE_REQUEST = '[USER] Profile Request';
+export const USER_PROFILE_SUCCESS = '[USER] Profile Success';
 export const UPDATE_REQUEST = '[USER] update request';
 export const UPDATE_SUCCESS = '[USER] update successful';
 
@@ -26,6 +28,16 @@ export class LoginSuccessAction implements ActionWithPayload {
   }
 }
 
+export class UserProfileRequestAction implements Action {
+  readonly type = USER_PROFILE_REQUEST;
+}
+
+export class UserProfileSuccessAction implements Action {
+  readonly type = USER_PROFILE_SUCCESS;
+
+  constructor(public payload: User) {
+  }
+}
 
 export class UpdateRequestAction implements ActionWithPayload {
   readonly type = UPDATE_REQUEST;

@@ -9,9 +9,7 @@ import * as fromActivity from './activity';
 import * as fromApp from './app';
 import * as fromEducation from './education';
 import {createSelector} from "reselect";
-
-
-import {APP_STATE_RESET} from '../actions/index';
+import {ActionReducerMap} from "@ngrx/store";
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -24,7 +22,7 @@ export interface State {
   education: fromEducation.EducationState
 }
 
-export const reducers = {
+export const reducers: ActionReducerMap<State> = {
   user: fromUser.reducer,
   activity: fromActivity.reducer,
   app: fromApp.reducer,
@@ -42,8 +40,6 @@ export const getEducationState = (state: State) => state.education;
  * All the selectors from app state
  */
 export const getAppLandingUrl = createSelector(getAppState, fromApp.getLandingUrl);
-export const getAppIsBootstrapped = createSelector(getAppState, fromApp.getIsBootstrapped);
-export const getAppIsMenuHidden = createSelector(getAppState, fromApp.getIsMenuHidden);
 
 /**
  * All the selectors from user state

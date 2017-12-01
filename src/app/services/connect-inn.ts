@@ -10,8 +10,8 @@ import {isUndefined} from "util";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
 import {
-  LoginRequestAction, LoginSuccessAction, UpdateRequestAction,
-  UpdateSuccessAction
+  LoginRequestAction, LoginSuccessAction, UpdateRequestAction, UpdateSuccessAction, UserProfileRequestAction,
+  UserProfileSuccessAction
 } from "../actions/user";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -87,7 +87,6 @@ export class ConnectInnService {
   }
 
   private handleError(error: Response): Observable<Error> {
-
     if (error.status === 401) {
       this.router.navigate(['/logout']);
       return Observable.throw({message: 'Unauthorized access!', error: null});
@@ -129,13 +128,13 @@ export class ConnectInnService {
   }
 
   me(): Observable<User> {
+    this.store.dispatch(new UserProfileRequestAction());
     return this.get('/me').map(res => {
       const user = res.json().data;
-      const userObject = Object.assign(new User(), user);
 
-      this.store.dispatch(new fromUser.UpdateSuccessAction(userObject));
+      this.store.dispatch(new UserProfileSuccessAction(user));
 
-      return userObject;
+      return user;
     }).catch((error) => this.handleError(error));
   }
 
