@@ -6,7 +6,8 @@ export class Activity {
   end: string;
   type: string;
   link: string;
+  meta: any;
 
-  createdAt: string;
-  udpatedAt: string;
+  created_at: string;
+  updated_at: string;
 }

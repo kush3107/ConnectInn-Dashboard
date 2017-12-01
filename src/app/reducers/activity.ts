@@ -20,16 +20,14 @@ export const initialState: State = {
 export function reducer(state = initialState, action: ActionWithPayload): State {
   switch (action.type) {
     case INDEX_REQUEST: {
-      return Object.assign({}, state, {loading: true});
+      return {...state, ...{loading: true}};
     }
 
     case INDEX_SUCCESS: {
       const activities = action.payload;
       const activitiesIds = activities.map(activity => activity.id);
       const entities = Utils.normalize(activities);
-      return Object.assign({}, state, {
-        ids: activitiesIds, loading: false, loaded: true, entities: entities
-      });
+      return {...state, ...{ids: activitiesIds, entities: entities, loading: false, loaded: true}};
     }
 
     case UPDATE_REQUEST: {

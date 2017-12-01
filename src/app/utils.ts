@@ -22,12 +22,13 @@ export class Utils {
   }
 
   static normalize(entityArray: Entity[]) {
-    const result = {};
-    for (let i = 0; i < entityArray.length; i++) {
-      result[entityArray[i].id] = entityArray[i];
-    }
-
-    return result;
+    return entityArray.reduce((entities: { [id: number]: Entity }, entity: Entity) => {
+      return {
+        ...entities, ...{
+          [entity.id]: entity
+        }
+      };
+    }, {});
   }
 
   static normalizedObjToArray(object: { [id: number]: any }) {

@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store';
 import {getUser, State} from '../reducers/index';
 import {User} from '../models/user';
 import {ConnectInnService} from "../services/connect-inn";
+import "rxjs/add/operator/filter";
 
 @Component({
   selector: 'ci-header',
