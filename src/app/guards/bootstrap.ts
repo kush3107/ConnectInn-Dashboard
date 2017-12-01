@@ -3,7 +3,7 @@ import {ConnectInnService} from "../services/connect-inn";
 import {Store} from "@ngrx/store";
 import {Injectable, OnInit} from "@angular/core";
 import {
-  getAppIsBootstrapped, getAppLandingUrl, getEducationsLoaded, getMyActivitiesLoaded, isLoggedIn, State
+  getAppLandingUrl, getEducationsLoaded, getMyActivitiesLoaded, isLoggedIn, State
 } from "../reducers/index";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/combineLatest";
