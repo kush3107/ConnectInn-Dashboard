@@ -1,32 +1,28 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'ci-error',
   template: `
-        <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <mat-icon>error_outline</mat-icon>
-            <span><ng-content></ng-content></span>
-        </div>
+    <div class="overlay" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <mat-icon>error_outline</mat-icon>
+      <span><ng-content></ng-content></span>
+      <button mat-raised-button color="primary" (click)="reload.next()">Try Again
+      </button>
+    </div>
     `,
   styles: [`
-        .page-container {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-        }
+    span {
+      font-size: x-large;
+    }
 
-        span {
-            font-size: x-large;
-        }
-
-        mat-icon {
-            font-size: 60px;
-            height: 60px;
-            width: 60px;
-        }
+    mat-icon {
+      font-size: 60px;
+      height: 60px;
+      width: 60px;
+    }
     `]
 })
 
 export class ErrorComponent {
-
+  @Output() reload = new EventEmitter();
 }

@@ -11,7 +11,7 @@ import "rxjs/add/operator/takeWhile";
 
 @Component({
   selector: 'ci-bootstrap', template: `
-    <ci-error *ngIf="failedLoading">Unable to load data</ci-error>
+    <ci-error (reload)="loadBootstrapData()" *ngIf="failedLoading">Unable to load data</ci-error>
     <ci-center-spinner *ngIf="!failedLoading"></ci-center-spinner>
   `, styles: []
 })
@@ -34,7 +34,7 @@ export class BootstrapComponent implements OnInit, OnDestroy {
     this.loadBootstrapData();
   }
 
-  private loadBootstrapData() {
+  public loadBootstrapData() {
     // this.service.me().takeWhile(() => this.isAlive).subscribe();
     //
     // this.store.select(isLoggedIn).takeWhile(() => this.isAlive).subscribe((loggedIn) => {
@@ -74,7 +74,7 @@ export class BootstrapComponent implements OnInit, OnDestroy {
       if (!data.loading && !data.loaded) {
         this.service.listEducations().subscribe(() => {
 
-        }, error2 => {
+        }, err => {
           console.log('failed in educations');
           this.failedLoading = true;
         });
@@ -100,7 +100,7 @@ export class BootstrapComponent implements OnInit, OnDestroy {
     }).takeWhile(() => this.isAlive).subscribe(data => {
       if (data.loggedIn && data.educationsLoaded && data.myActivitiesLoaded) {
         console.log('loaded');
-        this.router.navigateByUrl(this.redirectUrl);
+        this.router.navigate(['/feed']);
       }
     });
 

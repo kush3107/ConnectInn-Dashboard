@@ -54,5 +54,3 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
 }
 
 export const getLandingUrl = (state: State) => state.landing_url;
-export const getIsBootstrapped = (state: State) => state.is_bootstrapped;
-export const getIsMenuHidden = (state: State) => state.isMenuHidden;

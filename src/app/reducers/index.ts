@@ -40,8 +40,6 @@ export const getEducationState = (state: State) => state.education;
  * All the selectors from app state
  */
 export const getAppLandingUrl = createSelector(getAppState, fromApp.getLandingUrl);
-export const getAppIsBootstrapped = createSelector(getAppState, fromApp.getIsBootstrapped);
-export const getAppIsMenuHidden = createSelector(getAppState, fromApp.getIsMenuHidden);
 
 /**
  * All the selectors from user state
