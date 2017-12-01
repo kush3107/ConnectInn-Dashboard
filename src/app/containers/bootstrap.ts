@@ -20,9 +20,6 @@ export class BootstrapComponent implements OnInit, OnDestroy {
   failedLoading = false;
   private isAlive: boolean = true;
 
-  isListingsLoaded: boolean;
-  isUserLoaded: boolean;
-  isAdminsLoaded: boolean;
   user: User;
   redirectUrl: string;
 
@@ -73,7 +70,6 @@ export class BootstrapComponent implements OnInit, OnDestroy {
     }).takeWhile(() => this.isAlive).subscribe(data => {
       if (!data.loading && !data.loaded) {
         this.service.listEducations().subscribe(() => {
-
         }, err => {
           console.log('failed in educations');
           this.failedLoading = true;
@@ -103,18 +99,6 @@ export class BootstrapComponent implements OnInit, OnDestroy {
         this.router.navigate(['/feed']);
       }
     });
-
-    // const bootstrap = Observable.merge(this.store.select(isLoggedIn), educationsLoaded$, educationsLoading$, (loggedIn, educationsLoaded, educationsLoading) => ({}));
-    //
-    // bootstrap.takeWhile(() => this.isAlive).subscribe((data) => {
-    //   if (this.isUserLoaded) {
-    //     return this.store.select(getAppLandingUrl).takeWhile(() => this.isAlive).subscribe((value) => {
-    //       this.store.dispatch(new AppBootstrapSuccessAction());
-    //
-    //       this.router.navigate([value]);
-    //     });
-    //   }
-    // });
 
   }
 

@@ -44,24 +44,5 @@ export class BootstrapGuard implements CanActivate, OnInit {
 
       return !alreadyBootsrapped;
     });
-
-    // const observables = Rx.Observable.combineLatest(
-    //   this.store.select(isLoggedIn),
-    //   this.store.select(getAppIsBootstrapped),
-    //   (isLoggedIn, isBootstrapped) => {
-    //     return {
-    //       isLoggedIn: isLoggedIn,
-    //       isBootstrapped: isBootstrapped
-    //     };
-    //   }
-    // );
-    //
-    // return observables.map((data) => {
-    //   if (data.isLoggedIn && data.isBootstrapped) {
-    //     this.router.navigate(['/feed']);
-    //   }
-    //
-    //   return !data.isBootstrapped;
-    // });
   }
 }
