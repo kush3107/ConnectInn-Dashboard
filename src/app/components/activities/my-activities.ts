@@ -6,18 +6,23 @@ import {ConnectInnService} from "../../services/connect-inn";
 import {MatDialog} from "@angular/material";
 import {CreateActivityDialogComponent} from "../dialogs/activities/create-activity-dialog";
 import {Observable} from "rxjs/Observable";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'ci-my-activites', template: `
     <ci-center-spinner *ngIf="loading$ | async"></ci-center-spinner>
-    <div fxLayoutAlign="center stretch" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayoutGap="20px"></div>
+    <div fxLayout="row">
+      <span fxFlex="1 1 auto"></span>
+      <button mat-raised-button (click)="openActivityDialog()">Create</button>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
       <ci-activity-card
         *ngFor="let a of activities"
         [activity]="a"
-        (click)="openActivityDetail()">
+        (click)="openActivityDetail(a)">
       </ci-activity-card>
     </div>
-    <button mat-raised-button (click)="openActivityDialog()">Create</button>
   `, styles: []
 })
 
@@ -26,7 +31,10 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
   public alive = true;
 
-  constructor(private store: Store<State>, private service: ConnectInnService, private dialog: MatDialog) {
+  constructor(private store: Store<State>,
+              private service: ConnectInnService,
+              private dialog: MatDialog,
+              private router: Router) {
 
   }
 
@@ -43,8 +51,9 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
     this.dialog.open(CreateActivityDialogComponent).updateSize('80%');
   }
 
-  openActivityDetail() {
+  openActivityDetail(activity: Activity) {
     console.log('clicked');
+    this.router.navigate(['activities/' + activity.id]);
   }
 
   ngOnDestroy() {

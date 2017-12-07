@@ -31,6 +31,7 @@ import {CreateActivityDialogComponent} from "./components/dialogs/activities/cre
 import {ProfileComponent} from "./components/profile";
 import {ActivityCardComponent} from "./components/activities/activity-card";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {ActivityDetailComponent} from "./components/activities/activity-detail";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MyActivitiesListComponent,
     CreateActivityDialogComponent,
     ProfileComponent,
-    ActivityCardComponent
+    ActivityCardComponent,
+    ActivityDetailComponent
   ],
   imports: [
     BrowserModule,

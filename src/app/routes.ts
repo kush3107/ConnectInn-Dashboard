@@ -11,6 +11,7 @@ import {AuthGuard} from "./guards/auth";
 import {FeedComponent} from "./components/feed";
 import {MyActivitiesListComponent} from "./components/activities/my-activities";
 import {ProfileComponent} from "./components/profile";
+import {ActivityDetailComponent} from "./components/activities/activity-detail";
 
 export const routes: Routes = [
   {path: '', component: BootstrapComponent, canActivate: [BootstrapGuard]},
@@ -27,6 +28,9 @@ export const routes: Routes = [
       },
       {
         path: 'profile', component: ProfileComponent
+      },
+      {
+        path: 'activities/:id', component: ActivityDetailComponent
       }
     ]
   },
