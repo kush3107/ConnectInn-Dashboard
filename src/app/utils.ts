@@ -1,5 +1,6 @@
 import {URLSearchParams} from '@angular/http';
 import {Action} from "@ngrx/store";
+import * as moment from "moment";
 
 export class Utils {
   static objToSearchParams(obj): URLSearchParams {
@@ -78,6 +79,55 @@ export class Utils {
     // are considered equivalent
     return true;
   }
+
+  static getDateInFormat(date: Date) {
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  }
+
+  static getAllActivityTypes() {
+    return [
+      {
+        displayValue: 'Project',
+        slug: 'project'
+      },
+      {
+        displayValue: 'Competition',
+        slug: 'competition'
+      },
+      {
+        displayValue: 'Seminar',
+        slug: 'seminar'
+      },
+      {
+        displayValue: 'Workshop',
+        slug: 'workshop'
+      },
+      {
+        displayValue: 'Guest Lecture',
+        slug: 'guest_lecture'
+      },
+      {
+        displayValue: 'Certification',
+        slug: 'certification'
+      },
+      {
+        displayValue: 'Co Curricular',
+        slug: 'co_curricular'
+      },
+      {
+        displayValue: 'Training',
+        slug: 'training'
+      },
+      {
+        displayValue: 'Volunteer',
+        slug: 'volunteer'
+      },
+      {
+        displayValue: 'Other',
+        slug: 'other'
+      }
+    ];
+  }
 }
 
 interface Entity {
@@ -86,4 +136,11 @@ interface Entity {
 
 export interface ActionWithPayload extends Action {
   payload?: any;
+}
+
+export function getDateObj(date: string = '') {
+  if (date == '') {
+    return moment().toDate();
+  }
+  return moment(date).toDate();
 }

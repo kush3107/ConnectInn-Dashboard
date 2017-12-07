@@ -119,7 +119,7 @@ export class ConnectInnService {
       const userObject = Object.assign(new User(), res.json().user);
       this.store.dispatch(new LoginSuccessAction(userObject));
       return userObject;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   logout() {

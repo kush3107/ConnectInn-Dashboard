@@ -32,6 +32,7 @@ import {ProfileComponent} from "./components/profile";
 import {ActivityCardComponent} from "./components/activities/activity-card";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {ActivityDetailComponent} from "./components/activities/activity-detail";
+import {ModalPopupLayoutComponent} from "./components/layouts/modal-popup-layout";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {ActivityDetailComponent} from "./components/activities/activity-detail";
     BootstrapComponent,
     CentreSpinnerComponent,
     MyActivitiesListComponent,
+    ModalPopupLayoutComponent,
     CreateActivityDialogComponent,
     ProfileComponent,
     ActivityCardComponent,
@@ -74,7 +76,8 @@ import {ActivityDetailComponent} from "./components/activities/activity-detail";
     AuthGuard
   ],
   entryComponents: [
-    CreateActivityDialogComponent
+    CreateActivityDialogComponent,
+    ModalPopupLayoutComponent
   ],
   bootstrap: [AppComponent]
 })
