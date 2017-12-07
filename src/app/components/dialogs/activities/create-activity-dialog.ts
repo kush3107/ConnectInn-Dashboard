@@ -11,7 +11,7 @@ import {Activity} from "../../../models/activity";
 @Component({
   selector: 'ci-activity-dialog',
   template: `
-    <ci-modal-layout-popup headerTitle="{{headerTitle}}" xmlns="http://www.w3.org/1999/html">
+    <ci-modal-layout-popup headerTitle="{{headerTitle}}">
       <form fxLayout="column" fxLayoutGap="10px" (ngSubmit)="submitForm()" [formGroup]="formGroup">
         <mat-form-field class="full-width">
           <input matInput formControlName="title" placeholder="Title" type="text">

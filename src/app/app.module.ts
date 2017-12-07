@@ -33,6 +33,7 @@ import {ActivityCardComponent} from "./components/activities/activity-card";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {ActivityDetailComponent} from "./components/activities/activity-detail";
 import {ModalPopupLayoutComponent} from "./components/layouts/modal-popup-layout";
+import {EditProfileComponent} from "./components/dialogs/users/edit-profile";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {ModalPopupLayoutComponent} from "./components/layouts/modal-popup-layout
     CreateActivityDialogComponent,
     ProfileComponent,
     ActivityCardComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,8 @@ import {ModalPopupLayoutComponent} from "./components/layouts/modal-popup-layout
   ],
   entryComponents: [
     CreateActivityDialogComponent,
-    ModalPopupLayoutComponent
+    ModalPopupLayoutComponent,
+    EditProfileComponent
   ],
   bootstrap: [AppComponent]
 })

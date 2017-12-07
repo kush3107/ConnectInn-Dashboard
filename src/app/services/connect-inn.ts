@@ -6,7 +6,6 @@ import {MatSnackBar} from "@angular/material";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {User} from "../models/user";
-import {isUndefined} from "util";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
 import {
@@ -86,10 +85,11 @@ export class ConnectInnService {
     return options;
   }
 
-  private handleError(error: Response): Observable<Error> {
+  private handleError(error: Response) {
+
     if (error.status === 401) {
       this.router.navigate(['/logout']);
-      return Observable.throw({message: 'Unauthorized access!', error: null});
+      throw {message: 'Unauthorized access!', error: null};
     }
 
     const errorResponse = error.json()['errors'];
@@ -97,7 +97,7 @@ export class ConnectInnService {
     const errorCode = error.json()['code'];
 
     if (typeof errorResponse === 'string') {
-      return Observable.throw({message: errorResponse, error: null});
+      throw {message: errorResponse, error: null};
     } else if (errorResponse) {
       let message: string;
       for (const key in errorResponse) {
@@ -108,7 +108,9 @@ export class ConnectInnService {
       }
       return Observable.throw({message: message, error: errorResponse, code: errorCode});
     } else if (typeof messageRes === 'string') {
-      return Observable.throw({message: messageRes, error: null, code: errorCode});
+      throw {message: messageRes, error: null, code: errorCode};
+    } else {
+      throw {message: 'Some error occured! Please try again later.', error: null};
     }
   }
 
@@ -135,7 +137,7 @@ export class ConnectInnService {
       this.store.dispatch(new UserProfileSuccessAction(user));
 
       return user;
-    }).catch((error) => this.handleError(error));
+    }).catch((error) => this.handleError.bind(this));
   }
 
   updateMe(data: any): Observable<User> {
@@ -146,7 +148,7 @@ export class ConnectInnService {
       this.store.dispatch(new UpdateSuccessAction(user));
 
       return user;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   listMyActivities(): Observable<Activity[] | {}> {
@@ -156,7 +158,7 @@ export class ConnectInnService {
       this.store.dispatch(new ActivityIndexSuccessAction(activities));
 
       return activities;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   createActivity(data: {title: string, description?: string, start: string, end?: string, type: string, link?: string, meta?; any}): Observable<Activity> {
@@ -166,7 +168,7 @@ export class ConnectInnService {
       this.store.dispatch(new ActivityCreateSuccess(activity));
 
       return activity;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   updateActivity(activityId: number, data: {title?: string, description?: string, link?: string, meta?: any}): Observable<Activity> {
@@ -175,7 +177,7 @@ export class ConnectInnService {
       const activityObject = Object.assign(new Activity(), res.json().data);
       this.store.dispatch(new ActivityUpdateSuccessAction(activityObject));
       return activityObject;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {
@@ -184,7 +186,7 @@ export class ConnectInnService {
       const userObject = Object.assign(new User(), res.json().user);
       this.store.dispatch(new LoginSuccessAction(userObject));
       return userObject;
-    }).catch((error) => this.handleError(error));
+    }).catch((error) => this.handleError.bind(this)(error));
   }
 
   listEducations(): Observable<Education[] | {}> {
@@ -195,7 +197,7 @@ export class ConnectInnService {
       this.store.dispatch(new EducationIndexSuccessAction(educations));
 
       return educations;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   createEducation(data: {school: string, degree: string, grade: string, grade_type: string, start: string, end?: string, location?: string}): Observable<Education> {
@@ -205,7 +207,7 @@ export class ConnectInnService {
       this.store.dispatch(new EducationCreateSuccess(education));
 
       return education;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   updateEducation(educationId: number, data: {school?: string, degree?: string, grade?: string, grade_type?: string, start?: string, end?: string, location?: string}): Observable<Education> {
@@ -215,7 +217,7 @@ export class ConnectInnService {
       this.store.dispatch(new EducationUpdateSuccessAction(education));
 
       return education;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
   deleteEducation(educationId: number): Observable<number | {}> {
@@ -224,7 +226,7 @@ export class ConnectInnService {
       this.store.dispatch(new EducationDeleteSuccessRequest(educationId));
 
       return educationId;
-    }).catch(err => this.handleError(err));
+    }).catch(err => this.handleError.bind(this));
   }
 
 }

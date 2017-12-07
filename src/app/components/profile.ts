@@ -2,13 +2,15 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {getUser, State} from "../reducers";
 import {User} from "../models/user";
+import {MatDialog} from "@angular/material";
+import {EditProfileComponent} from "./dialogs/users/edit-profile";
 
 @Component({
   selector: 'ci-profile',
   template: `
     <div fxLayout="column" style="margin-top: 10px" fxLayoutAlign="start stretch" fxLayoutGap="15px">
       <mat-accordion fxFlex="80%" class="example-headers-align">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle="true">
           <mat-expansion-panel-header>
             <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
               <h2>{{user.name}}</h2>
@@ -20,7 +22,7 @@ import {User} from "../models/user";
           </mat-form-field>
 
           <mat-action-row>
-            <button mat-button color="primary" (click)="nextStep()">Edit Profile</button>
+            <button mat-button color="primary" (click)="openProfileDialog()">Edit Profile</button>
           </mat-action-row>
         </mat-expansion-panel>
 
@@ -49,7 +51,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   step = 0;
 
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private dialog: MatDialog) {
 
   }
 
@@ -59,16 +61,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
+  openProfileDialog() {
+    const dialog = this.dialog.open(EditProfileComponent).updateSize('60%', '45%');
+    dialog.componentInstance.user = this.user;
   }
 
   ngOnDestroy() {
