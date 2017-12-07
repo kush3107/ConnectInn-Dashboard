@@ -1,13 +1,77 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Store} from "@ngrx/store";
+import {getUser, State} from "../reducers";
+import {User} from "../models/user";
 
 @Component({
   selector: 'ci-profile',
   template: `
-    <h1>Profile Component</h1>
+    <div fxLayout="column" style="margin-top: 10px" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+      <mat-accordion fxFlex="80%" class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
+              <h2>{{user.name}}</h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input matInput placeholder="Email" [value]="user.email" disabled>
+          </mat-form-field>
+
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Edit Profile</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </div>
   `,
-  styles: []
+  styles: [`
+    .example-headers-align .mat-expansion-panel-header-title,
+    .example-headers-align .mat-expansion-panel-header-description {
+      flex-basis: 0;
+    }
+
+    .example-headers-align .mat-expansion-panel-header-description {
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  `]
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit, OnDestroy {
+  user: User;
+  private alive = true;
 
+  step = 0;
+
+
+  constructor(private store: Store<State>) {
+
+  }
+
+  ngOnInit() {
+    this.store.select(getUser).takeWhile(() => this.alive).subscribe(user => {
+      this.user = user;
+    })
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
+  }
 }
