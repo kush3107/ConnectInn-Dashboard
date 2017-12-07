@@ -1,6 +1,6 @@
 import {Activity} from "../models/activity";
 import {
-  ActivityIndexRequestAction, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS
+  CREATE_REQUEST, CREATE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS
 } from "../actions/activity";
 import {ActionWithPayload, Utils} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
@@ -28,6 +28,21 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
       const activitiesIds = activities.map(activity => activity.id);
       const entities = Utils.normalize(activities);
       return {...state, ...{ids: activitiesIds, entities: entities, loading: false, loaded: true}};
+    }
+
+    case CREATE_REQUEST: {
+      return {...state, ...{loading: true}};
+    }
+    case CREATE_SUCCESS: {
+      const activity = action.payload;
+      const id = activity.id;
+      const obj = {
+        [id]: activity
+      };
+      const entities = {...state.entities, ...obj};
+      const ids = [...state.ids, ...id];
+
+      return {...state, ...{ids: ids, entities: entities, loading: false, loaded: true}};
     }
 
     case UPDATE_REQUEST: {
