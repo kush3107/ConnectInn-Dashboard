@@ -30,6 +30,7 @@ import {MyActivitiesListComponent} from "./components/activities/my-activities";
 import {CreateActivityDialogComponent} from "./components/dialogs/activities/create-activity-dialog";
 import {ProfileComponent} from "./components/profile";
 import {ActivityCardComponent} from "./components/activities/activity-card";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {ActivityCardComponent} from "./components/activities/activity-card";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     HttpModule,
     HttpClientModule,
     MaterialModule,
