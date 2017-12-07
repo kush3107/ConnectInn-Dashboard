@@ -47,7 +47,7 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
   }
 
   openActivityDialog() {
-    const dialog = this.dialog.open(CreateActivityDialogComponent).updateSize('80%');
+    const dialog = this.dialog.open(CreateActivityDialogComponent).updateSize('60%', '70%');
   }
 
   ngOnDestroy() {

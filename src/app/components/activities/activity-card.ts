@@ -50,7 +50,7 @@ export class ActivityCardComponent {
   }
 
   editActivityDialog() {
-    const dialog = this.dialog.open(CreateActivityDialogComponent);
+    const dialog = this.dialog.open(CreateActivityDialogComponent).updateSize('60%', '70%');
     dialog.componentInstance.activity = this.activity;
   }
 }

@@ -6,7 +6,6 @@ import {Store} from "@ngrx/store";
 import {State} from "../../../reducers";
 import {MatDialog} from "@angular/material";
 import {AlertService} from "../../../services/alert";
-import moment from "moment";
 import {Activity} from "../../../models/activity";
 
 @Component({
@@ -117,8 +116,8 @@ export class CreateActivityDialogComponent implements OnInit {
     this.title.setValue(this.activity.title);
     this.description.setValue(this.activity.description);
     this.link.setValue(this.activity.link);
-    this.start.setValue(this.activity.start);
-    this.end.setValue(this.activity.end);
+    this.start.setValue(getDateObj(this.activity.start));
+    this.end.setValue(getDateObj(this.activity.end));
     this.type.setValue(this.activity.type);
   }
 
@@ -130,7 +129,9 @@ export class CreateActivityDialogComponent implements OnInit {
     this.start.setValue(Utils.getDateInFormat(getDateObj(this.start.value)));
     this.end.setValue(Utils.getDateInFormat(getDateObj(this.end.value)));
     const data = this.formGroup.getRawValue();
+
     console.log(data);
+
     this.isSaving = true;
     if (this.activity == null) {
       this.service.createActivity(data).subscribe(activity => {

@@ -56,7 +56,7 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
       return {
         ...state, entities: {
           ...state.entities, [newActivityId]: activity
-        }
+        }, loading: false, loaded: true
       };
     }
 
