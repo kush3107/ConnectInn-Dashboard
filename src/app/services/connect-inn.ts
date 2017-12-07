@@ -171,7 +171,7 @@ export class ConnectInnService {
 
   updateActivity(activityId: number, data: {title?: string, description?: string, link?: string, meta?: any}): Observable<Activity> {
     this.store.dispatch(new ActivityUpdateRequestAction());
-    return this.put('/activities' + activityId, data).map(res => {
+    return this.put('/activities/' + activityId, data).map(res => {
       const activityObject = Object.assign(new Activity(), res.json().data);
       this.store.dispatch(new ActivityUpdateSuccessAction(activityObject));
       return activityObject;

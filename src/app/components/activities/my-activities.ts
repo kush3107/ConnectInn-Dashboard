@@ -11,7 +11,7 @@ import {Route, Router} from "@angular/router";
 @Component({
   selector: 'ci-my-activites', template: `
     <ci-center-spinner *ngIf="loading$ | async"></ci-center-spinner>
-    <div fxLayout="column" fxLayoutGap="20px"></div>
+    <div fxLayout="column" fxLayoutGap="20px" style="margin-top: 10px"></div>
     <div fxLayout="row">
       <span fxFlex="1 1 auto"></span>
       <button mat-raised-button (click)="openActivityDialog()">Create</button>
@@ -19,8 +19,7 @@ import {Route, Router} from "@angular/router";
     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
       <ci-activity-card
         *ngFor="let a of activities"
-        [activity]="a"
-        (click)="openActivityDetail(a)">
+        [activity]="a">
       </ci-activity-card>
     </div>
   `, styles: []
@@ -49,11 +48,6 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
 
   openActivityDialog() {
     const dialog = this.dialog.open(CreateActivityDialogComponent).updateSize('80%');
-  }
-
-  openActivityDetail(activity: Activity) {
-    console.log('clicked');
-    this.router.navigate(['activities/' + activity.id]);
   }
 
   ngOnDestroy() {

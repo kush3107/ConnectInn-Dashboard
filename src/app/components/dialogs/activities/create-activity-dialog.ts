@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {getDateObj, Utils} from "../../../utils";
 import {ConnectInnService} from "../../../services/connect-inn";
@@ -7,11 +7,12 @@ import {State} from "../../../reducers";
 import {MatDialog} from "@angular/material";
 import {AlertService} from "../../../services/alert";
 import moment from "moment";
+import {Activity} from "../../../models/activity";
 
 @Component({
   selector: 'ci-activity-dialog',
   template: `
-    <ci-modal-layout-popup headerTitle="Create Activity" xmlns="http://www.w3.org/1999/html">
+    <ci-modal-layout-popup headerTitle="{{headerTitle}}" xmlns="http://www.w3.org/1999/html">
       <form fxLayout="column" fxLayoutGap="10px" (ngSubmit)="submitForm()" [formGroup]="formGroup">
         <mat-form-field class="full-width">
           <input matInput formControlName="title" placeholder="Title" type="text">
@@ -65,6 +66,8 @@ import moment from "moment";
 })
 
 export class CreateActivityDialogComponent implements OnInit {
+  @Input() activity: Activity = null;
+
   formGroup: FormGroup;
 
   activityTypes;
@@ -77,6 +80,8 @@ export class CreateActivityDialogComponent implements OnInit {
   start: FormControl;
   end: FormControl;
   type: FormControl;
+
+  headerTitle = 'Create Activity';
 
   constructor(private service: ConnectInnService, private dialog: MatDialog, private alertService: AlertService) {
 
@@ -100,6 +105,21 @@ export class CreateActivityDialogComponent implements OnInit {
       link: this.link,
       type: this.type
     });
+
+    if (this.activity !== null) {
+      this.setupForEdit();
+    }
+  }
+
+  private setupForEdit() {
+    this.headerTitle = 'Edit Activity';
+
+    this.title.setValue(this.activity.title);
+    this.description.setValue(this.activity.description);
+    this.link.setValue(this.activity.link);
+    this.start.setValue(this.activity.start);
+    this.end.setValue(this.activity.end);
+    this.type.setValue(this.activity.type);
   }
 
   submitForm() {
@@ -112,12 +132,22 @@ export class CreateActivityDialogComponent implements OnInit {
     const data = this.formGroup.getRawValue();
     console.log(data);
     this.isSaving = true;
-    this.service.createActivity(data).subscribe(activity => {
-      this.isSaving = false;
-      this.dialog.closeAll();
-    }, err => {
-      this.isSaving = false;
-      this.alertService.error(err);
-    });
+    if (this.activity == null) {
+      this.service.createActivity(data).subscribe(activity => {
+        this.isSaving = false;
+        this.dialog.closeAll();
+      }, err => {
+        this.isSaving = false;
+        this.alertService.error(err);
+      });
+    } else {
+      this.service.updateActivity(this.activity.id, data).subscribe(activity => {
+        this.isSaving = false;
+        this.dialog.closeAll();
+      }, err => {
+        this.isSaving = false;
+        this.alertService.error(err);
+      })
+    }
   }
 }
