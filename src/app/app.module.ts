@@ -29,6 +29,7 @@ import {LayoutMainComponent} from "./components/layouts/main-layout";
 import {MyActivitiesListComponent} from "./components/activities/my-activities";
 import {CreateActivityDialogComponent} from "./components/dialogs/activities/create-activity-dialog";
 import {ProfileComponent} from "./components/profile";
+import {ActivityCardComponent} from "./components/activities/activity-card";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ProfileComponent} from "./components/profile";
     CentreSpinnerComponent,
     MyActivitiesListComponent,
     CreateActivityDialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    ActivityCardComponent
   ],
   imports: [
     BrowserModule,

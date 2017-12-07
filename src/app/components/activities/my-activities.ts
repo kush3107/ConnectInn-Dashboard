@@ -8,10 +8,15 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
 import {Observable} from "rxjs/Observable";
 
 @Component({
-  selector: 'ci-my-activites',
-  template: `
+  selector: 'ci-my-activites', template: `
     <ci-center-spinner *ngIf="loading$ | async"></ci-center-spinner>
-    <p *ngFor="let a of activities">{{a.title}}</p>
+    <div fxLayoutAlign="center stretch" fxLayoutGap="20px">
+      <ci-activity-card
+        *ngFor="let a of activities"
+        [activity]="a"
+        (click)="openActivityDetail()">
+      </ci-activity-card>
+    </div>
     <button mat-raised-button (click)="openActivityDialog()">Create</button>
   `, styles: []
 })
@@ -36,6 +41,10 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
 
   openActivityDialog() {
     this.dialog.open(CreateActivityDialogComponent).updateSize('80%');
+  }
+
+  openActivityDetail() {
+    console.log('clicked');
   }
 
   ngOnDestroy() {
