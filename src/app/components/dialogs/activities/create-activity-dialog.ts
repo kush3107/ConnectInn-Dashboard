@@ -49,7 +49,7 @@ import {Activity} from "../../../models/activity";
         </div>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
           <mat-spinner *ngIf="isSaving" [diameter]="30" [strokeWidth]="4"></mat-spinner>
-          <button type="submit" color="accent" [disabled]="isSaving" mat-raised-button>Create</button>
+          <button type="submit" color="accent" [disabled]="isSaving" mat-raised-button>{{buttonTitle}}</button>
         </div>
       </form>
     </ci-modal-layout-popup>
@@ -81,6 +81,7 @@ export class CreateActivityDialogComponent implements OnInit {
   type: FormControl;
 
   headerTitle = 'Create Activity';
+  buttonTitle = 'Create';
 
   constructor(private service: ConnectInnService, private dialog: MatDialog, private alertService: AlertService) {
 
@@ -112,6 +113,7 @@ export class CreateActivityDialogComponent implements OnInit {
 
   private setupForEdit() {
     this.headerTitle = 'Edit Activity';
+    this.buttonTitle = 'Edit';
 
     this.title.setValue(this.activity.title);
     this.description.setValue(this.activity.description);

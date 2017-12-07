@@ -6,7 +6,7 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
 
 @Component({
   selector: 'ci-activity-card', template: `
-    <mat-card fxLayout="column" class="example-card">
+    <mat-card fxLayout="column" fxFlex="75%">
       <mat-card-header style="cursor: pointer">
         <mat-card-title (click)="openActivityDetail()"><h2>{{activity.title}}</h2></mat-card-title>
       </mat-card-header>
@@ -16,24 +16,19 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button (click)="editActivityDialog()">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="row">
+          <button mat-icon-button (click)="editActivityDialog()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-card-actions>
     </mat-card>
   `, styles: [`
     
-    .example-card {
-      width: 75%;
-    }
-
-    .example-header-image {
-      background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-      background-size: cover;
-    }
   `]
 })
 

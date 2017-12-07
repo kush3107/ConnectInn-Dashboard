@@ -10,13 +10,12 @@ import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'ci-my-activites', template: `
-    <ci-center-spinner *ngIf="loading$ | async"></ci-center-spinner>
     <div fxLayout="column" fxLayoutGap="20px" style="margin-top: 10px"></div>
     <div fxLayout="row">
       <span fxFlex="1 1 auto"></span>
       <button mat-raised-button (click)="openActivityDialog()">Create</button>
     </div>
-    <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="start stretch" style="margin-left: 12.5%" fxLayoutGap="15px">
       <ci-activity-card
         *ngFor="let a of activities"
         [activity]="a">
@@ -27,7 +26,6 @@ import {Route, Router} from "@angular/router";
 
 export class MyActivitiesListComponent implements OnInit, OnDestroy {
   activities: Activity[];
-  loading$: Observable<boolean>;
   public alive = true;
 
   constructor(private store: Store<State>,
@@ -42,8 +40,6 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
     this.store.select(getMyActivities).takeWhile(() => this.alive).subscribe(activities => {
       this.activities = activities;
     });
-
-    this.loading$ = this.store.select(getMyActivitiesLoading);
   }
 
   openActivityDialog() {
