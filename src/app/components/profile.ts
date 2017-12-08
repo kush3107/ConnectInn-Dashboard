@@ -16,6 +16,10 @@ import {EditProfileComponent} from "./dialogs/users/edit-profile";
               <h2>{{user.name}}</h2>
             </mat-panel-title>
           </mat-expansion-panel-header>
+          
+          <div fxLayout="row">
+            
+          </div>
 
           <mat-form-field>
             <input matInput placeholder="Email" [value]="user.email" disabled>
@@ -62,7 +66,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   openProfileDialog() {
-    const dialog = this.dialog.open(EditProfileComponent).updateSize('60%', '45%');
+    const dialog = this.dialog.open(EditProfileComponent).updateSize('60%', '55%');
     dialog.componentInstance.user = this.user;
   }
 

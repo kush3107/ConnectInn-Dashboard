@@ -30,6 +30,10 @@ import {AlertService} from "../../../services/alert";
             <input matInput formControlName="phone" placeholder="Phone" type="tel">
           </mat-form-field>
         </div>
+        <mat-form-field class="full-width">
+          <textarea matInput style="max-height: 100px" placeholder="About"
+                    formControlName="about"></textarea>
+        </mat-form-field>
         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="end center">
           <mat-spinner *ngIf="isSaving" [diameter]="30" [strokeWidth]="4"></mat-spinner>
           <button type="submit" color="accent" [disabled]="isSaving" mat-raised-button>Save</button>
@@ -57,6 +61,7 @@ export class EditProfileComponent implements OnInit {
   email: FormControl;
   phone: FormControl;
   dob: FormControl;
+  about: FormControl;
 
   isSaving = false;
 
@@ -69,12 +74,14 @@ export class EditProfileComponent implements OnInit {
     this.email = new FormControl(null, [Validators.required]);
     this.phone =  new FormControl();
     this.dob = new FormControl();
+    this.about = new FormControl();
 
     this.formGroup = new FormGroup({
       name: this.name,
       email: this.email,
       phone: this.phone,
-      dob: this.dob
+      dob: this.dob,
+      about: this.about
     });
 
     this.setupUser();
@@ -85,6 +92,7 @@ export class EditProfileComponent implements OnInit {
     this.email.setValue(this.user.email);
     this.phone.setValue(this.user.phone);
     this.dob.setValue(getDateObj(this.user.date_of_birth));
+    this.about.setValue(this.user.about);
   }
 
   submitForm() {
