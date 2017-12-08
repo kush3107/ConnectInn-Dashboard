@@ -81,8 +81,7 @@ export class BootstrapComponent implements OnInit, OnDestroy {
       return {loading, loaded};
     }).takeWhile(() => this.isAlive).subscribe(data => {
       if (!data.loading && !data.loaded) {
-        this.service.listMyActivities().subscribe(() => {
-
+        this.service.listMyActivities().subscribe((a) => {
         }, err => {
           console.log('failed in activities');
           console.log(err);

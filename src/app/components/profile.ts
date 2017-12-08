@@ -17,14 +17,17 @@ import {EditProfileComponent} from "./dialogs/users/edit-profile";
             </mat-panel-title>
           </mat-expansion-panel-header>
           
-          <div fxLayout="row">
-            
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <p>{{user.email}}</p>
+            <p>{{user.phone}}</p>
+            <p>{{user.date_of_birth}}</p>
+            <p>{{user.rating}}</p>
           </div>
-
-          <mat-form-field>
-            <input matInput placeholder="Email" [value]="user.email" disabled>
-          </mat-form-field>
-
+          
+          <div fxFlexAlign="center">
+            <p>{{user.about}}</p>
+          </div>
+          
           <mat-action-row>
             <button mat-button color="primary" (click)="openProfileDialog()">Edit Profile</button>
           </mat-action-row>

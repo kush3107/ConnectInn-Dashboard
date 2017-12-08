@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 export class Activity {
   id: number;
   title: string;
@@ -10,4 +12,12 @@ export class Activity {
 
   created_at: string;
   updated_at: string;
+
+  getOwner(): User {
+    return this['owner']['data'];
+  }
+
+  getMembers(): User[] {
+    return this['members']['data'];
+  }
 }
