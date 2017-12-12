@@ -34,6 +34,11 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {ActivityDetailComponent} from "./components/activities/activity-detail";
 import {ModalPopupLayoutComponent} from "./components/layouts/modal-popup-layout";
 import {EditProfileComponent} from "./components/dialogs/users/edit-profile";
+import {AngularFireModule} from "angularfire2";
+import {environment} from "../environments/environment";
+import {InboxContainerComponent} from "./containers/inbox-container";
+import {AngularFirestoreModule} from "angularfire2/firestore";
+import {AngularFireDatabaseProvider} from "angularfire2/database";
 
 @NgModule({
   declarations: [
@@ -55,10 +60,13 @@ import {EditProfileComponent} from "./components/dialogs/users/edit-profile";
     ProfileComponent,
     ActivityCardComponent,
     ActivityDetailComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    InboxContainerComponent
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpModule,
@@ -75,7 +83,8 @@ import {EditProfileComponent} from "./components/dialogs/users/edit-profile";
     AlertService,
     AnonymousGuard,
     BootstrapGuard,
-    AuthGuard
+    AuthGuard,
+    AngularFireDatabaseProvider
   ],
   entryComponents: [
     CreateActivityDialogComponent,

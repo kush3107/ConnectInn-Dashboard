@@ -15,7 +15,8 @@ import "rxjs/add/operator/filter";
         <button id="accounts_link" mat-button routerLink="/feed" routerLinkActive="selected">Home</button>
         <button id="ctas_link" mat-button routerLink="/my-activities" routerLinkActive="selected">My Activities</button>
         <span fxFlex="1 1 auto"></span>
-        
+
+        <button id="inbox_link" mat-button routerLink="/inbox" routerLinkActive="selected">Inbox</button>
         <button mat-button type="button" [matMenuTriggerFor]="userSettingsMenu">
           {{username | titlecase}}
           <mat-icon>keyboard_arrow_down</mat-icon>
