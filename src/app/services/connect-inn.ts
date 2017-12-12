@@ -229,4 +229,10 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
+  sendUserMessage(data: {message: number, channel: string}): Observable<any> {
+    return this.post('/messages/users', data).map(() => {
+      return;
+    });
+  }
+
 }
