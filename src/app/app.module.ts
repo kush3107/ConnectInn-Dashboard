@@ -39,6 +39,7 @@ import {environment} from "../environments/environment";
 import {InboxContainerComponent} from "./containers/inbox-container";
 import {AngularFirestoreModule} from "angularfire2/firestore";
 import {AngularFireDatabaseProvider} from "angularfire2/database";
+import {FollowersComponent} from "./components/followers";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {AngularFireDatabaseProvider} from "angularfire2/database";
     ActivityCardComponent,
     ActivityDetailComponent,
     EditProfileComponent,
-    InboxContainerComponent
+    InboxContainerComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,

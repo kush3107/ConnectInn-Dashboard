@@ -13,6 +13,7 @@ import {MyActivitiesListComponent} from "./components/activities/my-activities";
 import {ProfileComponent} from "./components/profile";
 import {ActivityDetailComponent} from "./components/activities/activity-detail";
 import {InboxContainerComponent} from "./containers/inbox-container";
+import {FollowersComponent} from "./components/followers";
 
 export const routes: Routes = [
   {path: '', component: BootstrapComponent, canActivate: [BootstrapGuard]},
@@ -35,6 +36,9 @@ export const routes: Routes = [
       },
       {
         path: 'inbox', component: InboxContainerComponent
+      },
+      {
+        path: 'followers', component: FollowersComponent
       }
     ]
   },
