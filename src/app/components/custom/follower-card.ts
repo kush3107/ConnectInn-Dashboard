@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {User} from "../../models/user";
 import {ConnectInnService} from "../../services/connect-inn";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'ci-follower-card',
   template: `
-    <mat-card class="follower-card">
+    <mat-card class="follower-card" style="display: inline-block">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar [style.background-image]="sanitizeImage(follower.profile_pic)"  class="example-header-image"></div>
         <mat-card-title>{{follower.name}}</mat-card-title>
         <mat-card-subtitle>{{follower.email}}</mat-card-subtitle>
       </mat-card-header>
@@ -17,18 +18,15 @@ import {ConnectInnService} from "../../services/connect-inn";
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Follow</button>
-        <button mat-button (click)="deleteFollower()">UnFollow</button>
+        <button mat-button (click)="deleteFollower()">Un Follow</button>
       </mat-card-actions>
     </mat-card>
   `,
   styles: [`
     .follower-card {
-      width: 200px;
     }
 
     .example-header-image {
-      background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
       background-size: cover;
     }
   `]
@@ -37,12 +35,20 @@ import {ConnectInnService} from "../../services/connect-inn";
 export class FollowerCardComponent implements OnInit{
   @Input() follower: User;
 
-  constructor(private service: ConnectInnService) {
+  constructor(private service: ConnectInnService, private sanitizer: DomSanitizer) {
 
   }
 
   ngOnInit() {
 
+  }
+
+  public sanitizeImage(image: string) {
+    if (!image) {
+      image = '/assets/images/default_pro_picture.png';
+    }
+
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
 
   deleteFollower() {
