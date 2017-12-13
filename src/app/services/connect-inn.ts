@@ -151,6 +151,14 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
+  listFollowers(): Observable<User[] | {}> {
+    return this.get('/followers').map(res => {
+      const followers = res.json().data;
+
+      return followers;
+    }).catch(err => this.handleError.bind(this));
+  }
+
   listMyActivities(): Observable<Activity[] | {}> {
     this.store.dispatch(new ActivityIndexRequestAction());
     return this.get('/activities').map(res => {
