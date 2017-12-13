@@ -1,59 +1,81 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {getUser, State} from "../reducers";
+import {getEducations, getUser, State} from "../reducers";
 import {User} from "../models/user";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent} from "./dialogs/users/edit-profile";
+import {Education} from "../models/education";
 
 @Component({
   selector: 'ci-profile',
   template: `
-    <div fxLayout="column" style="margin-top: 10px" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-      <mat-accordion fxFlex="80%" class="example-headers-align">
-        <mat-expansion-panel [expanded]="step === 0" hideToggle="true">
-          <mat-expansion-panel-header>
-            <mat-panel-title fxLayout="row" fxLayoutAlign="center center">
-              <h2>{{user.name}}</h2>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          
-          <div fxLayout="row" fxLayoutAlign="space-around center">
-            <p>{{user.email}}</p>
-            <p>{{user.phone}}</p>
-            <p>{{user.date_of_birth}}</p>
-            <p>{{user.rating}}</p>
+    <div fxLayout="row" style="margin-top: 15px" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <div fxLayout="column" fxFlex="30%">
+        <div style="margin-left: 25px">
+          <img class="profile-img"  [src]="user.profile_pic" [alt]="user.name">
+          <p id="ed" class="sub-heading">EDUCATIONS</p>
+          <div fxLayout="column" *ngFor="let education of educations">
+            {{education.school}}
           </div>
-          
-          <div fxFlexAlign="center">
-            <p>{{user.about}}</p>
-          </div>
-          
-          <mat-action-row>
-            <button mat-button color="primary" (click)="openProfileDialog()">Edit Profile</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-
-      </mat-accordion>
-
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="70%" fxLayoutAlign="start start">
+        <h2>{{user.name}}</h2>
+        <p class="small-text">{{user.about}}</p>
+        <hr>
+        <mat-tab-group [ngStyle]="{width: '100%'}">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>account_circle</mat-icon>&nbsp;About
+            </ng-template>
+            <div style="margin-top: 30px">
+              <div>
+                <p class="sub-heading">CONTACT INFORMATION</p>
+                <div fxLayout="column" fxLayoutGap="25px" style="margin-top: 20px">
+                  <div fxLayout="row">
+                    <p class="small-text"><strong class="small-text">Phone:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user.phone}}</p>
+                  </div>
+                  <div fxLayout="row">
+                    <p class="small-text"><strong class="small-text">Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user.email}}</p>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 30px">
+                <p class="sub-heading">BASIC INFORMATION</p>
+                <div fxLayout="column" fxLayoutGap="25px" style="margin-top: 20px">
+                  <div fxLayout="row">
+                    <p class="small-text"><strong class="small-text">Birthday:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user.date_of_birth | date:'mediumDate'}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </div>
   `,
-  styles: [`
-    .example-headers-align .mat-expansion-panel-header-title,
-    .example-headers-align .mat-expansion-panel-header-description {
-      flex-basis: 0;
+  styles: [`    
+    .profile-img {
+      height: 200px;
+      width: 200px;
+      border-radius: 2px;
     }
-
-    .example-headers-align .mat-expansion-panel-header-description {
-      justify-content: space-between;
-      align-items: center;
+    
+    .sub-heading {
+      color: gray;
+      font-size: 0.75em;
     }
-
+    
+    .small-text {
+      font-size: 0.85em;
+    }
   `]
 })
 
 export class ProfileComponent implements OnInit, OnDestroy {
   user: User;
   private alive = true;
+  educations: Education[] = [];
 
   step = 0;
 
@@ -65,7 +87,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.select(getUser).takeWhile(() => this.alive).subscribe(user => {
       this.user = user;
-    })
+    });
+    this.store.select(getEducations).takeWhile(() => this.alive).subscribe(educations => {
+      this.educations = educations;
+      console.log(educations);
+    });
   }
 
   openProfileDialog() {
