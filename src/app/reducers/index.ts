@@ -69,6 +69,6 @@ export const getEducationsLoading = createSelector(getEducationState, fromEducat
 // Followers Related
 export const getFollowerIds = createSelector(getFollowerState, fromFollower.getIds);
 export const getFollowerEntities = createSelector(getFollowerState, fromFollower.getEntities);
-export const getFollowers = createSelector(getFollowerState, fromFollower.getEducations);
+export const getFollowers = createSelector(getFollowerState, fromFollower.getFollowers);
 export const getFollowerLoaded = createSelector(getFollowerState, fromFollower.getLoaded);
 export const getFollowerLoading = createSelector(getFollowerState, fromFollower.getLoading);

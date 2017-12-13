@@ -4,8 +4,8 @@ import {ConnectInnService} from "../services/connect-inn";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {
-  getAppLandingUrl, getEducationsLoaded, getEducationsLoading, getMyActivitiesLoaded, getMyActivitiesLoading, getUser,
-  isLoggedIn, isLoggingIn, State
+  getAppLandingUrl, getEducationsLoaded, getEducationsLoading, getFollowerLoaded, getFollowerLoading,
+  getMyActivitiesLoaded, getMyActivitiesLoading, getUser, isLoggedIn, isLoggingIn, State
 } from "../reducers/index";
 import "rxjs/add/operator/takeWhile";
 
@@ -32,15 +32,6 @@ export class BootstrapComponent implements OnInit, OnDestroy {
   }
 
   public loadBootstrapData() {
-    // this.service.me().takeWhile(() => this.isAlive).subscribe();
-    //
-    // this.store.select(isLoggedIn).takeWhile(() => this.isAlive).subscribe((loggedIn) => {
-    //   this.isUserLoaded = loggedIn;
-    // });
-    //
-    // this.store.select(getUser).takeWhile(() => this.isAlive).subscribe((user) => {
-    //   this.user = user;
-    // });
 
     this.store.select(getAppLandingUrl).subscribe(url => this.redirectUrl);
 
@@ -52,6 +43,9 @@ export class BootstrapComponent implements OnInit, OnDestroy {
 
     const myActivitiesLoaded$ = this.store.select(getMyActivitiesLoaded);
     const myActivitiesLoading$ = this.store.select(getMyActivitiesLoading);
+
+    const followersLoading$ = this.store.select(getFollowerLoading);
+    const followersLoaded$ = this.store.select(getFollowerLoaded);
 
     loggedIn$.combineLatest(loggingIn$, (loggedIn, loggingIn) => {
       return {loggedIn, loggingIn};
@@ -90,10 +84,18 @@ export class BootstrapComponent implements OnInit, OnDestroy {
       }
     });
 
-    loggedIn$.combineLatest(educationsLoaded$, myActivitiesLoaded$, (loggedIn, educationsLoaded, myActivitiesLoaded) => {
-      return {loggedIn, educationsLoaded, myActivitiesLoaded};
+    followersLoading$.combineLatest(followersLoaded$, (loading, loaded) => {
+      return {loading, loaded};
     }).takeWhile(() => this.isAlive).subscribe(data => {
-      if (data.loggedIn && data.educationsLoaded && data.myActivitiesLoaded) {
+      if (!data.loading && !data.loaded) {
+        this.service.listFollowers().subscribe();
+      }
+    });
+
+    loggedIn$.combineLatest(educationsLoaded$, myActivitiesLoaded$, followersLoaded$, (loggedIn, educationsLoaded, myActivitiesLoaded, followersLoaded) => {
+      return {loggedIn, educationsLoaded, myActivitiesLoaded, followersLoaded};
+    }).takeWhile(() => this.isAlive).subscribe(data => {
+      if (data.loggedIn && data.educationsLoaded && data.myActivitiesLoaded && data.followersLoaded) {
         console.log('loaded');
         this.router.navigate(['/feed']);
       }

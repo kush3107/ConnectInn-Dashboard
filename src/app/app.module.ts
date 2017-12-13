@@ -40,6 +40,7 @@ import {InboxContainerComponent} from "./containers/inbox-container";
 import {AngularFirestoreModule} from "angularfire2/firestore";
 import {AngularFireDatabaseProvider} from "angularfire2/database";
 import {FollowersComponent} from "./components/followers";
+import {FollowerCardComponent} from "./components/custom/follower-card";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {FollowersComponent} from "./components/followers";
     ActivityDetailComponent,
     EditProfileComponent,
     InboxContainerComponent,
-    FollowersComponent
+    FollowersComponent,
+    FollowerCardComponent
   ],
   imports: [
     BrowserModule,

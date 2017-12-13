@@ -14,7 +14,6 @@ import {
 } from "../actions/user";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import * as fromUser from '../actions/user';
 import {Router} from "@angular/router";
 import {AppStateResetAction} from "../actions/index";
 import {

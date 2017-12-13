@@ -1,11 +1,11 @@
 import {Education} from "../models/education";
 import {ActionWithPayload, Utils} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
+import {createSelector} from "reselect";
 import {
   CREATE_REQUEST, CREATE_SUCCESS, DELETE_REQUEST, DELETE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST,
   UPDATE_SUCCESS
-} from "../actions/education";
-import {createSelector} from "reselect";
+} from "../actions/follower";
 
 export interface FollowerState {
   ids: number[];
@@ -31,7 +31,7 @@ export function reducer(state = initialState, action: ActionWithPayload): Follow
     case INDEX_SUCCESS: {
       const followers = action.payload;
       const obj = Utils.normalize(followers);
-      const ids = followers.map(education => education.id);
+      const ids = followers.map(follower => follower.id);
       const entities = {...state.entities, ...obj};
 
       return {...state, ...{loading: false, loaded: true, entities: entities, ids: ids}};
@@ -86,4 +86,4 @@ export const getIds = (state: FollowerState) => state.ids;
 export const getLoaded = (state: FollowerState) => state.loaded;
 export const getLoading = (state: FollowerState) => state.loading;
 export const getEntities = (state: FollowerState) => state.entities;
-export const getEducations = createSelector(getIds, getEntities, (ids, entities) => ids.map(id => entities[id]));
+export const getFollowers = createSelector(getIds, getEntities, (ids, entities) => ids.map(id => entities[id]));
