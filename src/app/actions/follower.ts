@@ -11,44 +11,44 @@ export const DELETE_REQUEST = '[FOLLOWERS] Delete Request';
 export const DELETE_SUCCESS = '[FOLLOWERS] Delete Success';
 
 
-export class EducationIndexRequestAction implements ActionWithPayload {
+export class FollowerIndexRequestAction implements ActionWithPayload {
   readonly type = INDEX_REQUEST;
 }
 
-export class EducationIndexSuccessAction implements ActionWithPayload {
+export class FollowerIndexSuccessAction implements ActionWithPayload {
   readonly type = INDEX_SUCCESS;
 
   constructor(public payload: User[]) {
   }
 }
 
-export class EducationCreateRequest implements ActionWithPayload {
+export class FollowerCreateRequest implements ActionWithPayload {
   readonly type = CREATE_REQUEST;
 }
 
-export class EducationCreateSuccess implements ActionWithPayload {
+export class FollowerCreateSuccess implements ActionWithPayload {
   readonly type = CREATE_SUCCESS;
 
   constructor(public payload: {data: User}) {
   }
 }
 
-export class EducationUpdateRequestAction implements ActionWithPayload {
+export class FollowerUpdateRequestAction implements ActionWithPayload {
   readonly type = UPDATE_REQUEST;
 }
 
-export class EducationUpdateSuccessAction implements ActionWithPayload {
+export class FollowerUpdateSuccessAction implements ActionWithPayload {
   readonly type = UPDATE_SUCCESS;
 
   constructor(public payload: {data: User}) {
   }
 }
 
-export class EducationDeleteRequestAction implements ActionWithPayload {
+export class FollowerDeleteRequestAction implements ActionWithPayload {
   readonly type = DELETE_REQUEST;
 }
 
-export class EducationDeleteSuccessRequest implements ActionWithPayload {
+export class FollowerDeleteSuccessRequest implements ActionWithPayload {
   readonly type = DELETE_SUCCESS;
 
   constructor(public payload: number) { }

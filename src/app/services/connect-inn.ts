@@ -27,6 +27,7 @@ import {
   EducationIndexRequestAction, EducationIndexSuccessAction, EducationUpdateRequestAction, EducationUpdateSuccessAction
 } from "../actions/education";
 import {Education} from "../models/education";
+import {FollowerIndexRequestAction, FollowerIndexSuccessAction} from "../actions/follower";
 
 @Injectable()
 export class ConnectInnService {
@@ -152,11 +153,21 @@ export class ConnectInnService {
   }
 
   listFollowers(): Observable<User[] | {}> {
+    this.store.dispatch(new FollowerIndexRequestAction());
     return this.get('/followers').map(res => {
       const followers = res.json().data;
+      this.store.dispatch(new FollowerIndexSuccessAction(followers));
 
       return followers;
     }).catch(err => this.handleError.bind(this));
+  }
+
+  addFollower() {
+
+  }
+
+  removeFollower() {
+
   }
 
   listMyActivities(): Observable<Activity[] | {}> {
