@@ -10,7 +10,7 @@ import {
 export interface FollowerState {
   ids: number[];
   entities: {
-    [id: number]: Education
+    [id: number]: User
   };
   loading: boolean;
   loaded: boolean;

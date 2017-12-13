@@ -26,7 +26,10 @@ import {
   EducationIndexRequestAction, EducationIndexSuccessAction, EducationUpdateRequestAction, EducationUpdateSuccessAction
 } from "../actions/education";
 import {Education} from "../models/education";
-import {FollowerIndexRequestAction, FollowerIndexSuccessAction} from "../actions/follower";
+import {
+  FollowerDeleteRequestAction, FollowerDeleteSuccessRequest, FollowerIndexRequestAction,
+  FollowerIndexSuccessAction
+} from "../actions/follower";
 
 @Injectable()
 export class ConnectInnService {
@@ -165,8 +168,14 @@ export class ConnectInnService {
 
   }
 
-  removeFollower() {
+  removeFollower(id: number): Observable<any> {
+    this.store.dispatch(new FollowerDeleteRequestAction());
 
+    return this.post('/users/' + id + '/un-follow').map(() => {
+      this.store.dispatch(new FollowerDeleteSuccessRequest(id));
+
+      return;
+    })
   }
 
   listMyActivities(): Observable<Activity[] | {}> {
