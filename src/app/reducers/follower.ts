@@ -6,6 +6,7 @@ import {
   CREATE_REQUEST, CREATE_SUCCESS, DELETE_REQUEST, DELETE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST,
   UPDATE_SUCCESS
 } from "../actions/follower";
+import {User} from "../models/user";
 
 export interface FollowerState {
   ids: number[];
