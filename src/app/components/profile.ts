@@ -5,6 +5,7 @@ import {User} from "../models/user";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent} from "./dialogs/users/edit-profile";
 import {Education} from "../models/education";
+import {EducationPopupComponent} from "./dialogs/education-popup";
 
 @Component({
   selector: 'ci-profile',
@@ -13,7 +14,13 @@ import {Education} from "../models/education";
       <div fxLayout="column" fxFlex="30%">
         <div style="margin-left: 25px">
           <img class="profile-img"  [src]="user.profile_pic" [alt]="user.name">
-          <p id="ed" class="sub-heading">EDUCATIONS</p>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <p id="ed" class="sub-heading">EDUCATIONS</p>
+            <button fxFlexOffset="30" mat-icon-button (click)="openEducationPopup()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <br>
           <div fxLayout="column" *ngFor="let education of educations">
             {{education.school}}
           </div>
@@ -97,6 +104,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   openProfileDialog() {
     const dialog = this.dialog.open(EditProfileComponent).updateSize('60%', '55%');
     dialog.componentInstance.user = this.user;
+  }
+
+  openEducationPopup() {
+    this.dialog.open(EducationPopupComponent).updateSize('60%', '75%')
   }
 
   ngOnDestroy() {
