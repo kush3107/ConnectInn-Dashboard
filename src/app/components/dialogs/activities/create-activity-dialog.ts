@@ -54,13 +54,6 @@ import {Activity} from "../../../models/activity";
       </form>
     </ci-modal-layout-popup>
   `, styles: [`
-    .full-width {
-      width: 100%;
-    }
-    
-    .half-width {
-      width: 48%;
-    }
   `]
 })
 

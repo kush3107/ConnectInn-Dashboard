@@ -41,6 +41,7 @@ import {AngularFirestoreModule} from "angularfire2/firestore";
 import {AngularFireDatabaseProvider} from "angularfire2/database";
 import {FollowersComponent} from "./components/followers";
 import {FollowerCardComponent} from "./components/custom/follower-card";
+import {EducationPopupComponent} from "./components/dialogs/education-popup";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {FollowerCardComponent} from "./components/custom/follower-card";
     EditProfileComponent,
     InboxContainerComponent,
     FollowersComponent,
-    FollowerCardComponent
+    FollowerCardComponent,
+    EducationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ import {FollowerCardComponent} from "./components/custom/follower-card";
   entryComponents: [
     CreateActivityDialogComponent,
     ModalPopupLayoutComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EducationPopupComponent
   ],
   bootstrap: [AppComponent]
 })
