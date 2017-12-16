@@ -9,7 +9,11 @@ import {User} from "../models/user";
 import {Store} from "@ngrx/store";
 import {State} from "../reducers/index";
 import {
-  LoginRequestAction, LoginSuccessAction, UpdateRequestAction, UpdateSuccessAction, UserProfileRequestAction,
+  LoginRequestAction,
+  LoginSuccessAction,
+  UpdateRequestAction,
+  UpdateSuccessAction,
+  UserProfileRequestAction,
   UserProfileSuccessAction
 } from "../actions/user";
 import "rxjs/add/operator/map";
@@ -17,19 +21,29 @@ import "rxjs/add/operator/catch";
 import {Router} from "@angular/router";
 import {AppStateResetAction} from "../actions/index";
 import {
-  ActivityCreateRequest, ActivityCreateSuccess, ActivityIndexRequestAction, ActivityIndexSuccessAction,
-  ActivityUpdateRequestAction, ActivityUpdateSuccessAction
+  ActivityCreateRequest,
+  ActivityCreateSuccess,
+  ActivityIndexRequestAction,
+  ActivityIndexSuccessAction,
+  ActivityUpdateRequestAction,
+  ActivityUpdateSuccessAction
 } from "../actions/activity";
 import {Activity} from "../models/activity";
 import {
-  EducationCreateRequest, EducationCreateSuccess, EducationDeleteRequestAction, EducationDeleteSuccessRequest,
-  EducationIndexRequestAction, EducationIndexSuccessAction, EducationUpdateRequestAction, EducationUpdateSuccessAction
+  EducationCreateRequest,
+  EducationCreateSuccess,
+  EducationDeleteRequestAction,
+  EducationDeleteSuccessRequest,
+  EducationIndexRequestAction,
+  EducationIndexSuccessAction,
+  EducationUpdateRequestAction,
+  EducationUpdateSuccessAction
 } from "../actions/education";
 import {Education} from "../models/education";
 import {
-  FollowerDeleteRequestAction, FollowerDeleteSuccessRequest, FollowerIndexRequestAction,
-  FollowerIndexSuccessAction
+  FollowerDeleteRequestAction, FollowerDeleteSuccessRequest, FollowerIndexRequestAction, FollowerIndexSuccessAction
 } from "../actions/follower";
+import {Experience} from "../models/experience";
 
 @Injectable()
 export class ConnectInnService {
@@ -188,7 +202,7 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
-  createActivity(data: {title: string, description?: string, start: string, end?: string, type: string, link?: string, meta?; any}): Observable<Activity> {
+  createActivity(data: { title: string, description?: string, start: string, end?: string, type: string, link?: string, meta?; any }): Observable<Activity> {
     this.store.dispatch(new ActivityCreateRequest());
     return this.post('/activities', data).map(res => {
       const activity = Object.assign(new Activity(), res.json().data);
@@ -198,7 +212,7 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
-  updateActivity(activityId: number, data: {title?: string, description?: string, link?: string, meta?: any}): Observable<Activity> {
+  updateActivity(activityId: number, data: { title?: string, description?: string, link?: string, meta?: any }): Observable<Activity> {
     this.store.dispatch(new ActivityUpdateRequestAction());
     return this.put('/activities/' + activityId, data).map(res => {
       const activityObject = Object.assign(new Activity(), res.json().data);
@@ -207,7 +221,7 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
-  register(data: {email: string, name: string, password: string, password_confirmation: string}): Observable<User> {
+  register(data: { email: string, name: string, password: string, password_confirmation: string }): Observable<User> {
     return this.post('/register', data).map(res => {
       localStorage.setItem('auth_token', res.json().token);
       const userObject = Object.assign(new User(), res.json().user);
@@ -227,7 +241,7 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
-  createEducation(data: {school: string, degree: string, grade: string, grade_type: string, start: string, end?: string, location?: string}): Observable<Education> {
+  createEducation(data: { school: string, degree: string, grade: string, grade_type: string, start: string, end?: string, location?: string }): Observable<Education> {
     this.store.dispatch(new EducationCreateRequest());
     return this.post('/educations', data).map(res => {
       const education = res.json().data;
@@ -237,7 +251,7 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
-  updateEducation(educationId: number, data: {school?: string, degree?: string, grade?: string, grade_type?: string, start?: string, end?: string, location?: string}): Observable<Education> {
+  updateEducation(educationId: number, data: { school?: string, degree?: string, grade?: string, grade_type?: string, start?: string, end?: string, location?: string }): Observable<Education> {
     this.store.dispatch(new EducationUpdateRequestAction());
     return this.put('/educations/' + educationId, data).map(res => {
       const education = res.json().data;
@@ -256,7 +270,35 @@ export class ConnectInnService {
     }).catch(err => this.handleError.bind(this));
   }
 
-  sendUserMessage(data: {message: number, channel: string}): Observable<any> {
+  listExperiences(): Observable<Experience[] | {}> {
+    return this.get('/experiences').map(res => {
+      const array = res.json().data;
+
+      return array;
+    })
+  }
+
+  createExperience(data: {
+    organisation_name: string, designation: string, description?: string, from: string, to?: string, location: string
+  }): Observable<Experience> {
+    return this.post('/experiences', data).map(res => {
+      const exp = res.json().data;
+
+      return exp;
+    })
+  }
+
+  updateExperience(id: number, data: {
+    organisation_name?: string, designation?: string, description?: string, from?: string, to?: string, location?: string
+  }): Observable<Experience> {
+    return this.put('/experiences/' + id, data).map(res => {
+      const exp = res.json().data;
+
+      return exp;
+    })
+  }
+
+  sendUserMessage(data: { message: number, channel: string }): Observable<any> {
     return this.post('/messages/users', data).map(() => {
       return;
     });
