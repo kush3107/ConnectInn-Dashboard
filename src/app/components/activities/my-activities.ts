@@ -18,6 +18,7 @@ import {Route, Router} from "@angular/router";
     <div fxLayout="column" fxLayoutAlign="start stretch" style="margin-left: 12.5%" fxLayoutGap="15px">
       <ci-activity-card
         *ngFor="let a of activities"
+        (deleteAction)="deleteActivity(a)"
         [activity]="a">
       </ci-activity-card>
     </div>
@@ -44,6 +45,11 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
 
   openActivityDialog() {
     const dialog = this.dialog.open(CreateActivityDialogComponent).updateSize('60%', '70%');
+  }
+
+  deleteActivity(activity: Activity) {
+    console.log('delete');
+    this.service.deleteActivity(activity.id).subscribe();
   }
 
   ngOnDestroy() {

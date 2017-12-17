@@ -21,7 +21,7 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
           <button mat-icon-button (click)="editActivityDialog()">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="deleteClicked()">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -34,6 +34,7 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
 
 export class ActivityCardComponent {
   @Input() activity: Activity;
+  @Output() deleteAction = new EventEmitter<any>();
 
   constructor(private router: Router, private dialog: MatDialog) {
 
@@ -42,6 +43,10 @@ export class ActivityCardComponent {
   openActivityDetail() {
     console.log('clicked');
     this.router.navigate(['activities/' + this.activity.id]);
+  }
+
+  deleteClicked() {
+    this.deleteAction.emit();
   }
 
   editActivityDialog() {

@@ -1,6 +1,7 @@
 import {Activity} from "../models/activity";
 import {
-  CREATE_REQUEST, CREATE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST, UPDATE_SUCCESS
+  CREATE_REQUEST, CREATE_SUCCESS, DELETE_REQUEST, DELETE_SUCCESS, INDEX_REQUEST, INDEX_SUCCESS, UPDATE_REQUEST,
+  UPDATE_SUCCESS
 } from "../actions/activity";
 import {ActionWithPayload, Utils} from "../utils";
 import {APP_STATE_RESET} from "../actions/index";
@@ -58,6 +59,17 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
           ...state.entities, [newActivityId]: activity
         }, loading: false, loaded: true
       };
+    }
+
+    case DELETE_REQUEST: {
+      return {...state, ...{loading: true}};
+    }
+    case DELETE_SUCCESS: {
+      const id = action.payload;
+      const newIds = state.ids.filter(el => el !== id);
+      const newEntities = Utils.removeKey(state.entities, id);
+
+      return {...state, ...{entities: newEntities, ids: newIds, loading: false, loaded: true}};
     }
 
     case APP_STATE_RESET: {

@@ -7,6 +7,8 @@ export const CREATE_REQUEST = '[ACTIVITY] Create Request';
 export const CREATE_SUCCESS = '[ACTIVITY] Create Success';
 export const UPDATE_REQUEST = '[ACTIVITY] Update Request';
 export const UPDATE_SUCCESS = '[ACTIVITY] Update Success';
+export const DELETE_REQUEST = '[ACTIVITY] Delete Request';
+export const DELETE_SUCCESS = '[ACTIVITY] Delete Success';
 
 export class ActivityIndexRequestAction implements ActionWithPayload {
   readonly type = INDEX_REQUEST;
@@ -39,4 +41,14 @@ export class ActivityUpdateSuccessAction implements ActionWithPayload {
 
   constructor(public payload: {data: Activity}) {
   }
+}
+
+export class ActivityDeleteRequestAction implements ActionWithPayload {
+  readonly type = DELETE_REQUEST;
+}
+
+export class ActivityDeleteSuccessRequest implements ActionWithPayload {
+  readonly type = DELETE_SUCCESS;
+
+  constructor(public payload: number) { }
 }

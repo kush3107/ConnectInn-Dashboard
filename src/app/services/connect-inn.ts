@@ -21,12 +21,8 @@ import "rxjs/add/operator/catch";
 import {Router} from "@angular/router";
 import {AppStateResetAction} from "../actions/index";
 import {
-  ActivityCreateRequest,
-  ActivityCreateSuccess,
-  ActivityIndexRequestAction,
-  ActivityIndexSuccessAction,
-  ActivityUpdateRequestAction,
-  ActivityUpdateSuccessAction
+  ActivityCreateRequest, ActivityCreateSuccess, ActivityDeleteRequestAction, ActivityDeleteSuccessRequest,
+  ActivityIndexRequestAction, ActivityIndexSuccessAction, ActivityUpdateRequestAction, ActivityUpdateSuccessAction
 } from "../actions/activity";
 import {Activity} from "../models/activity";
 import {
@@ -223,6 +219,15 @@ export class ConnectInnService {
       const activityObject = Object.assign(new Activity(), res.json().data);
       this.store.dispatch(new ActivityUpdateSuccessAction(activityObject));
       return activityObject;
+    }).catch(err => this.handleError.bind(this));
+  }
+
+  deleteActivity(id: number): Observable<any> {
+    this.store.dispatch(new ActivityDeleteRequestAction());
+    return this.delete('/activities/' + id).map(() => {
+      this.store.dispatch(new ActivityDeleteSuccessRequest(id));
+
+      return id;
     }).catch(err => this.handleError.bind(this));
   }
 
