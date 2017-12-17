@@ -1,13 +1,14 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {getEducations, getExperiences, getUser, State} from "../reducers";
-import {User} from "../models/user";
+import {getAttributes, User} from "../models/user";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent} from "./dialogs/users/edit-profile";
 import {Education} from "../models/education";
 import {EducationPopupComponent} from "./dialogs/education-popup";
 import {Experience} from "../models/experience";
 import {ExperiencePopupComponent} from "./dialogs/experience-popup";
+import {Attribute} from "../models/attribute";
 
 @Component({
   selector: 'ci-profile',
@@ -75,6 +76,28 @@ import {ExperiencePopupComponent} from "./dialogs/experience-popup";
             </div>
           </mat-tab>
         </mat-tab-group>
+        <mat-tab-group [ngStyle]="{width: '100%'}">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              Skills
+            </ng-template>
+            <mat-chip-list>
+              <mat-chip *ngFor="let skill of skills">
+                {{skill.value}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              Interests
+            </ng-template>
+            <mat-chip-list>
+              <mat-chip *ngFor="let interest of interests">
+                {{interest.value}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-tab>
+        </mat-tab-group>
       </div>
     </div>
   `,
@@ -102,6 +125,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   educations: Education[] = [];
   experiences: Experience[] = [];
 
+  skills: Attribute[] = [];
+  interests: Attribute[] = [];
+
   step = 0;
 
 
@@ -112,6 +138,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.select(getUser).takeWhile(() => this.alive).subscribe(user => {
       this.user = user;
+      this.skills = getAttributes(this.user).filter(attr => attr.type === 'skill');
+      this.interests = getAttributes(this.user).filter(attr => attr.type === 'interest');
     });
     this.store.select(getEducations).takeWhile(() => this.alive).subscribe(educations => {
       this.educations = educations;
