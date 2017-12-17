@@ -12,12 +12,12 @@ export class Activity {
 
   created_at: string;
   updated_at: string;
+}
 
-  getOwner(): User {
-    return this['owner']['data'];
-  }
+export function getOwner(activity: Activity): User {
+  return this['owner']['data'];
+}
 
-  getMembers(): User[] {
-    return this['members']['data'];
-  }
+export function getMembers(activity: Activity): User[] {
+  return this['members']['data'];
 }
