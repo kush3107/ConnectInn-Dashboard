@@ -101,7 +101,7 @@ export class InboxMessagesComponent implements OnDestroy, OnInit {
     });
 
     this.formGroup = new FormGroup({
-      message: new FormControl(null, Validators.required)
+      message: new FormControl(null, []);
     })
   }
 
@@ -117,7 +117,11 @@ export class InboxMessagesComponent implements OnDestroy, OnInit {
     const data = this.formGroup.value;
     data['channel'] = this.channel;
 
-    this.service.sendUserMessage(data).subscribe();
+    if (data.message !== '') {
+      this.service.sendUserMessage(data).subscribe(() => {
+        this.formGroup.reset();
+      });
+    }
   }
 
   ngOnDestroy() {
