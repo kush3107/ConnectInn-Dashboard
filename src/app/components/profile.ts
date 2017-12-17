@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {getEducations, getUser, State} from "../reducers";
+import {getEducations, getExperiences, getUser, State} from "../reducers";
 import {User} from "../models/user";
 import {MatDialog} from "@angular/material";
 import {EditProfileComponent} from "./dialogs/users/edit-profile";
 import {Education} from "../models/education";
 import {EducationPopupComponent} from "./dialogs/education-popup";
+import {Experience} from "../models/experience";
+import {ExperiencePopupComponent} from "./dialogs/experience-popup";
 
 @Component({
   selector: 'ci-profile',
@@ -14,15 +16,30 @@ import {EducationPopupComponent} from "./dialogs/education-popup";
       <div fxLayout="column" fxFlex="30%">
         <div style="margin-left: 25px">
           <img class="profile-img"  [src]="user.profile_pic" [alt]="user.name">
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <p id="ed" class="sub-heading">EDUCATIONS</p>
-            <button fxFlexOffset="30" mat-icon-button (click)="openEducationPopup()">
-              <mat-icon>add</mat-icon>
-            </button>
+          <div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <p id="ed" class="sub-heading">EXPERIENCES</p>
+              <button fxFlexOffset="30" mat-icon-button (click)="openExperiencePopup()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <br>
+            <div fxLayout="column" *ngFor="let exp of experiences">
+              {{exp.organisation_name}}
+            </div>
           </div>
           <br>
-          <div fxLayout="column" *ngFor="let education of educations">
-            {{education.school}}
+          <div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <p id="ed" class="sub-heading">EDUCATIONS</p>
+              <button fxFlexOffset="30" mat-icon-button (click)="openEducationPopup()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <br>
+            <div fxLayout="column" *ngFor="let education of educations">
+              {{education.school}}
+            </div>
           </div>
         </div>
       </div>
@@ -83,6 +100,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   user: User;
   private alive = true;
   educations: Education[] = [];
+  experiences: Experience[] = [];
 
   step = 0;
 
@@ -99,6 +117,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.educations = educations;
       console.log(educations);
     });
+    this.store.select(getExperiences).takeWhile(() => this.alive).subscribe(exps => {
+      this.experiences = exps;
+    })
   }
 
   openProfileDialog() {
@@ -108,6 +129,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   openEducationPopup() {
     this.dialog.open(EducationPopupComponent).updateSize('60%', '75%')
+  }
+
+  openExperiencePopup() {
+    this.dialog.open(ExperiencePopupComponent).updateSize('60%', '70%')
   }
 
   ngOnDestroy() {
