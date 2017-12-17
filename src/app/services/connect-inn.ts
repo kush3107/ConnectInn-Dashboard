@@ -44,6 +44,11 @@ import {
   FollowerDeleteRequestAction, FollowerDeleteSuccessRequest, FollowerIndexRequestAction, FollowerIndexSuccessAction
 } from "../actions/follower";
 import {Experience} from "../models/experience";
+import {
+  ExperienceCreateRequest, ExperienceCreateSuccess, ExperienceDeleteRequestAction, ExperienceDeleteSuccessRequest,
+  ExperienceIndexRequestAction, ExperienceIndexSuccessAction, ExperienceUpdateRequestAction,
+  ExperienceUpdateSuccessAction
+} from "../actions/experience";
 
 @Injectable()
 export class ConnectInnService {
@@ -272,30 +277,46 @@ export class ConnectInnService {
 
   listExperiences(): Observable<Experience[] | {}> {
     return this.get('/experiences').map(res => {
+      this.store.dispatch(new ExperienceIndexRequestAction());
       const array = res.json().data;
+      this.store.dispatch(new ExperienceIndexSuccessAction(array));
 
       return array;
-    })
+    }).catch(err => this.handleError.bind(this))
   }
 
   createExperience(data: {
     organisation_name: string, designation: string, description?: string, from: string, to?: string, location: string
   }): Observable<Experience> {
+    this.store.dispatch(new ExperienceCreateRequest());
     return this.post('/experiences', data).map(res => {
       const exp = res.json().data;
 
+      this.store.dispatch(new ExperienceCreateSuccess(exp));
+
       return exp;
-    })
+    }).catch(err => this.handleError.bind(this))
   }
 
   updateExperience(id: number, data: {
     organisation_name?: string, designation?: string, description?: string, from?: string, to?: string, location?: string
   }): Observable<Experience> {
+    this.store.dispatch(new ExperienceUpdateRequestAction());
     return this.put('/experiences/' + id, data).map(res => {
       const exp = res.json().data;
+      this.store.dispatch(new ExperienceUpdateSuccessAction(exp));
 
       return exp;
-    })
+    }).catch(err => this.handleError.bind(this))
+  }
+
+  deleteExperience(id: number): Observable<any> {
+    this.store.dispatch(new ExperienceDeleteRequestAction());
+    return this.delete('/experiences/' + id).map(() => {
+      this.store.dispatch(new ExperienceDeleteSuccessRequest(id));
+
+      return id;
+    }).catch(err => this.handleError.bind(this));
   }
 
   sendUserMessage(data: { message: number, channel: string }): Observable<any> {

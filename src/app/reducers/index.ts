@@ -8,6 +8,7 @@ import * as fromUser from './user';
 import * as fromActivity from './activity';
 import * as fromApp from './app';
 import * as fromEducation from './education';
+import * as fromExperience from './experience';
 import * as fromFollower from './follower';
 import {createSelector} from "reselect";
 import {ActionReducerMap} from "@ngrx/store";
@@ -21,6 +22,7 @@ export interface State {
   activity: fromActivity.State;
   app: fromApp.State;
   education: fromEducation.EducationState,
+  experience: fromExperience.ExperienceState,
   follower: fromFollower.FollowerState
 }
 
@@ -29,6 +31,7 @@ export const reducers: ActionReducerMap<State> = {
   activity: fromActivity.reducer,
   app: fromApp.reducer,
   education: fromEducation.reducer,
+  experience: fromExperience.reducer,
   follower: fromFollower.reducer
 };
 
@@ -38,6 +41,7 @@ export const getAppState = (state: State) => state.app;
 export const getUserState = (state: State) => state.user;
 export const getActivityState = (state: State) => state.activity;
 export const getEducationState = (state: State) => state.education;
+export const getExperienceState = (state: State) => state.experience;
 export const getFollowerState = (state: State) => state.follower;
 
 /**
@@ -65,6 +69,13 @@ export const getEducationEntities = createSelector(getEducationState, fromEducat
 export const getEducations = createSelector(getEducationState, fromEducation.getEducations);
 export const getEducationsLoaded = createSelector(getEducationState, fromEducation.getLoaded);
 export const getEducationsLoading = createSelector(getEducationState, fromEducation.getLoading);
+
+// Experience Related
+export const getExperienceIds = createSelector(getExperienceState, fromExperience.getIds);
+export const getExperienceEntities = createSelector(getExperienceState, fromExperience.getEntities);
+export const getExperiences = createSelector(getExperienceState, fromExperience.getExperiences);
+export const getExperiencesLoaded = createSelector(getExperienceState, fromExperience.getLoaded);
+export const getExperiencesLoading = createSelector(getExperienceState, fromExperience.getLoading);
 
 // Followers Related
 export const getFollowerIds = createSelector(getFollowerState, fromFollower.getIds);
