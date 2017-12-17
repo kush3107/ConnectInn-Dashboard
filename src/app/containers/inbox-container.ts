@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from "@angular/core";
+import {AfterContentInit, Component, OnDestroy, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {AngularFirestore} from "angularfire2/firestore";
 import {AngularFireDatabase} from "angularfire2/database";
@@ -15,8 +15,17 @@ import {Router} from "@angular/router";
     <mat-progress-bar *ngIf="loading" [color]="'warn'" mode="indeterminate"></mat-progress-bar>
     <div *ngIf="!loading" fxLayout="row">
       <div fxFlex="25%">
-        <div class="thread-box" *ngFor="let thread of threads; let i=index" (click)="navigate(i)">
-          {{thread}}
+        <div class="thread-box"
+             fxLayout="row"
+             fxLayoutGap="10px"
+             fxLayoutAlign="start center"
+             [ngClass]="i == selectedIndex ? 'selectedBackground' : ''"
+             *ngFor="let thread of threads; let i=index"
+             (click)="navigate(i)">
+          <img class="avatarImg"
+               [src]="thread.profile_pic == null ? '/assets/images/default_pro_picture.png' : thread.profile_pic"
+               [alt]="thread.name">
+          <p>{{thread.name}}</p>
         </div>
       </div>
       <div fxFlex="75%">
@@ -26,18 +35,34 @@ import {Router} from "@angular/router";
   `,
   styles: [`
     .thread-box {
-      height: 20px;
+      height: 60px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    
+    .avatarImg {
+      width: 50px;
+      height: 50px
+    }
+    
+    .selectedBackground {
+      background-color: #f2f2f2;
+    }
+    
+    img {
+      border-radius: 50%;
     }
   `]
 })
 
 export class InboxContainerComponent implements OnDestroy {
-  items: Observable<any[]>;
-  threads: string[] = [];
+  threads: User[] = [];
   channels: string[] = [];
   user: User;
 
   alive = true;
+
+  selectedIndex = -1;
 
   loading = true;
 
@@ -67,9 +92,9 @@ export class InboxContainerComponent implements OnDestroy {
         this.store.select(getFollowers).takeWhile(() => this.alive).subscribe(followers => {
           const id = followers.findIndex(follower => follower.id === otherId);
           if (id !== -1) {
-            this.threads.push(followers[id].name);
+            this.threads.push(followers[id]);
           } else {
-            this.threads.push(getFollowing(this.user).find(f => f.id === otherId).name);
+            this.threads.push(getFollowing(this.user).find(f => f.id === otherId));
           }
         });
 
@@ -77,10 +102,14 @@ export class InboxContainerComponent implements OnDestroy {
       }
 
       this.loading = false;
+      if (this.alive) {
+        this.navigate(0);
+      }
     })
   }
 
   navigate(i: number) {
+    this.selectedIndex = i;
     this.router.navigate(['inbox/' + this.channels[i]]);
   }
 

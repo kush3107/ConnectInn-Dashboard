@@ -11,7 +11,7 @@ import {ConnectInnService} from "../../services/connect-inn";
 @Component({
   selector: 'ci-inbox-messages', template: `
     <div #chatContainer fxLayout="column" class="container">
-      <div *ngFor="let message of messages" [fxFlexAlign]="!isMyMessage(message) ? 'start' : 'end'"
+      <div *ngFor="let message of messages" [ngClass]="!isMyMessage(message) ? 'right-background' : 'left-background'" [fxFlexAlign]="!isMyMessage(message) ? 'start' : 'end'"
            class="talk-bubble round">
         <div class="talktext">
           <p>{{message.message}}</p>
@@ -59,7 +59,17 @@ import {ConnectInnService} from "../../services/connect-inn";
       display: inline-block;
       width: 200px;
       height: auto;
-      background-color: lightblue;
+    }
+
+
+
+    .left-background {
+      background-color: #1683f4;
+      color: white;
+    }
+
+    .right-background {
+      background-color: #f2f2f2;
     }
 
     .border {
