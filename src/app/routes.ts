@@ -14,6 +14,7 @@ import {ProfileComponent} from "./components/profile";
 import {ActivityDetailComponent} from "./components/activities/activity-detail";
 import {InboxContainerComponent} from "./containers/inbox-container";
 import {FollowersComponent} from "./components/followers";
+import {InboxMessagesComponent} from "./components/inbox/inbox-messages";
 
 export const routes: Routes = [
   {path: '', component: BootstrapComponent, canActivate: [BootstrapGuard]},
@@ -35,7 +36,12 @@ export const routes: Routes = [
         path: 'activities/:id', component: ActivityDetailComponent
       },
       {
-        path: 'inbox', component: InboxContainerComponent
+        path: 'inbox', component: InboxContainerComponent,
+        children: [
+          {
+            path: ':channel', component: InboxMessagesComponent
+          }
+        ]
       },
       {
         path: 'followers', component: FollowersComponent

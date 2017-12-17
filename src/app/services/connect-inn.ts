@@ -143,7 +143,7 @@ export class ConnectInnService {
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('auth_token');
     this.store.dispatch(new AppStateResetAction());
   }
 

@@ -43,6 +43,7 @@ import {FollowersComponent} from "./components/followers";
 import {FollowerCardComponent} from "./components/custom/follower-card";
 import {EducationPopupComponent} from "./components/dialogs/education-popup";
 import {ExperiencePopupComponent} from "./components/dialogs/experience-popup";
+import {InboxMessagesComponent} from "./components/inbox/inbox-messages";
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {ExperiencePopupComponent} from "./components/dialogs/experience-popup";
     FollowersComponent,
     FollowerCardComponent,
     EducationPopupComponent,
-    ExperiencePopupComponent
+    ExperiencePopupComponent,
+    InboxMessagesComponent
   ],
   imports: [
     BrowserModule,
