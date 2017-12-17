@@ -15,7 +15,7 @@ import {ExperiencePopupComponent} from "./dialogs/experience-popup";
     <div fxLayout="row" style="margin-top: 15px" fxLayoutAlign="start stretch" fxLayoutGap="10px">
       <div fxLayout="column" fxFlex="30%">
         <div style="margin-left: 25px">
-          <img class="profile-img"  [src]="user.profile_pic" [alt]="user.name">
+          <img class="profile-img"  [src]="user.profile_pic == null ? '/assets/images/default_pro_picture.png' : user.profile_pic" [alt]="user.name">
           <div>
             <div fxLayout="row" fxLayoutAlign="start center">
               <p id="ed" class="sub-heading">EXPERIENCES</p>
