@@ -11,3 +11,7 @@ export class User {
   createdAt: string;
   udpatedAt: string;
 }
+
+export function getFollowing(user: User): User[] {
+  return user['following']['data'];
+}

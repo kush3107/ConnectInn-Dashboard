@@ -4,9 +4,9 @@ import {AngularFirestore} from "angularfire2/firestore";
 import {AngularFireDatabase} from "angularfire2/database";
 import {environment} from "../../environments/environment";
 import {UserMessage} from "../models/user-message";
-import {User} from "../models/user";
+import {getFollowing, User} from "../models/user";
 import {Store} from "@ngrx/store";
-import {getFollowerEntities, getUser, State} from "../reducers";
+import {getFollowerEntities, getFollowers, getUser, State} from "../reducers";
 import {Router} from "@angular/router";
 
 @Component({
@@ -50,21 +50,27 @@ export class InboxContainerComponent implements OnDestroy {
       for (const key in chats) {
         const parts = key.split('_');
 
-        let followerId = 0;
+        let otherId = 0;
 
         if (+parts[1] === this.user.id) {
-          followerId = +parts[2];
+          otherId = +parts[2];
         } else if (+parts[2] === this.user.id) {
-          followerId = +parts[1];
+          otherId = +parts[1];
         } else {
           continue;
         }
 
         this.channels.push(key);
+        console.log(getFollowing(this.user));
 
-        this.store.select(getFollowerEntities).takeWhile(() => this.alive).subscribe(entities => {
-          const follower = entities[followerId];
-          this.threads.push(follower.name);
+
+        this.store.select(getFollowers).takeWhile(() => this.alive).subscribe(followers => {
+          const id = followers.findIndex(follower => follower.id === otherId);
+          if (id !== -1) {
+            this.threads.push(followers[id].name);
+          } else {
+            this.threads.push(getFollowing(this.user).find(f => f.id === otherId).name);
+          }
         });
 
         console.log(this.threads);

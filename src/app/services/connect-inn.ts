@@ -149,7 +149,7 @@ export class ConnectInnService {
 
   me(): Observable<User> {
     this.store.dispatch(new UserProfileRequestAction());
-    return this.get('/me').map(res => {
+    return this.get('/me?include=following').map(res => {
       const user = res.json().data;
 
       this.store.dispatch(new UserProfileSuccessAction(user));

@@ -110,7 +110,7 @@ export class InboxMessagesComponent implements OnDestroy, OnInit {
   }
 
   public isMyMessage(message: UserMessage): boolean {
-    return message.sender_id === this.user.id;
+    return message.sender.id === this.user.id;
   }
 
   submitForm() {
