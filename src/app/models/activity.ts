@@ -15,9 +15,9 @@ export class Activity {
 }
 
 export function getOwner(activity: Activity): User {
-  return this['owner']['data'];
+  return activity['owner']['data'];
 }
 
 export function getMembers(activity: Activity): User[] {
-  return this['members']['data'];
+  return activity['members']['data'];
 }

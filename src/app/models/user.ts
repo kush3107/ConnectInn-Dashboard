@@ -1,3 +1,5 @@
+import {Attribute} from "./attribute";
+
 export class User {
   id: number;
   name: string;
@@ -8,10 +10,14 @@ export class User {
   rating: number;
   date_of_birth: string;
 
-  createdAt: string;
-  udpatedAt: string;
+  created_at: string;
+  udpated_at: string;
 }
 
 export function getFollowing(user: User): User[] {
   return user['following']['data'];
+}
+
+export function  getAttributes(user: User): Attribute[] {
+  return user['attributes']['data'];
 }
