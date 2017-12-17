@@ -113,7 +113,9 @@ export class BootstrapComponent implements OnInit, OnDestroy {
     }).takeWhile(() => this.isAlive).subscribe(data => {
       if (data.loggedIn && data.educationsLoaded && data.myActivitiesLoaded && data.followersLoaded && data.experiencesLoaded) {
         console.log('loaded');
-        this.router.navigate(['/feed']);
+        this.store.select(getAppLandingUrl).takeWhile(() => this.isAlive).subscribe(url => {
+          this.router.navigate([url]);
+        })
       }
     });
 

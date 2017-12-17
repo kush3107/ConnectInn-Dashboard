@@ -1,5 +1,5 @@
 import {APP_LANDING_URL} from "../actions/app";
-import {APP_BOOTSTRAPPED, APP_STATE_RESET} from "../actions/index";
+import {APP_BOOTSTRAPPED, APP_STATE_RESET} from "../actions";
 import {ActionWithPayload} from "../utils";
 import {LOGIN_SUCCESS} from "../actions/user";
 import {UPDATE_SUCCESS} from "../actions/activity";
@@ -42,7 +42,7 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
 
       const user = action.payload;
 
-      return Object.assign({}, state, {landing_url: '/feed'});
+      return Object.assign({}, state, {landing_url: '/profile'});
     }
     case APP_STATE_RESET: {
       return {...initialState};

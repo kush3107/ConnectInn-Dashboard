@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {getEducationsLoaded, getMyActivitiesLoaded, isLoggedIn, State} from '../reducers/index';
 import {Store} from '@ngrx/store';
 import {ConnectInnService} from "../services/connect-inn";
+import {SetLandingUrlAction} from "../actions/app";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -30,6 +31,8 @@ export class AuthGuard implements CanActivate {
       return loggedIn && educationsLoaded && activitiesloaded;
     }).map(alreadyBootsrapped => {
       if (!alreadyBootsrapped) {
+        this.store.dispatch(new SetLandingUrlAction(state.url));
+
         this.router.navigate(['/']);
       }
 
