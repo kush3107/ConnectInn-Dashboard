@@ -42,6 +42,7 @@ import {AngularFireDatabaseProvider} from "angularfire2/database";
 import {FollowersComponent} from "./components/followers";
 import {FollowerCardComponent} from "./components/custom/follower-card";
 import {EducationPopupComponent} from "./components/dialogs/education-popup";
+import {ExperiencePopupComponent} from "./components/dialogs/experience-popup";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {EducationPopupComponent} from "./components/dialogs/education-popup";
     InboxContainerComponent,
     FollowersComponent,
     FollowerCardComponent,
-    EducationPopupComponent
+    EducationPopupComponent,
+    ExperiencePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +98,8 @@ import {EducationPopupComponent} from "./components/dialogs/education-popup";
     CreateActivityDialogComponent,
     ModalPopupLayoutComponent,
     EditProfileComponent,
-    EducationPopupComponent
+    EducationPopupComponent,
+    ExperiencePopupComponent
   ],
   bootstrap: [AppComponent]
 })
