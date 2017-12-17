@@ -6,7 +6,7 @@ import {CreateActivityDialogComponent} from "../dialogs/activities/create-activi
 
 @Component({
   selector: 'ci-activity-card', template: `
-    <mat-card fxLayout="column" fxFlex="75%">
+    <mat-card fxLayout="column">
       <mat-card-header style="cursor: pointer">
         <mat-card-title (click)="openActivityDetail()"><h2>{{activity.title}}</h2></mat-card-title>
       </mat-card-header>

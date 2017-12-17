@@ -16,8 +16,10 @@ import {AlertService} from "../../services/alert";
       <span fxFlex="1 1 auto"></span>
       <button mat-raised-button (click)="openActivityDialog()">Create</button>
     </div>
-    <div fxLayout="column" fxLayoutAlign="start stretch" style="margin-left: 12.5%" fxLayoutGap="15px">
+    <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
       <ci-activity-card
+        fxFlexAlign="center"
+        style="width: 75%"
         *ngFor="let a of activities"
         (deleteAction)="deleteActivity(a)"
         [activity]="a">
