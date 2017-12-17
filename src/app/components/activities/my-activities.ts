@@ -3,10 +3,11 @@ import {Activity} from "../../models/activity";
 import {Store} from "@ngrx/store";
 import {getMyActivities, getMyActivitiesLoaded, getMyActivitiesLoading, State} from "../../reducers/index";
 import {ConnectInnService} from "../../services/connect-inn";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {CreateActivityDialogComponent} from "../dialogs/activities/create-activity-dialog";
 import {Observable} from "rxjs/Observable";
 import {Route, Router} from "@angular/router";
+import {AlertService} from "../../services/alert";
 
 @Component({
   selector: 'ci-my-activites', template: `
@@ -32,7 +33,8 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
   constructor(private store: Store<State>,
               private service: ConnectInnService,
               private dialog: MatDialog,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
 
   }
 
@@ -49,7 +51,11 @@ export class MyActivitiesListComponent implements OnInit, OnDestroy {
 
   deleteActivity(activity: Activity) {
     console.log('delete');
-    this.service.deleteActivity(activity.id).subscribe();
+    this.service.deleteActivity(activity.id).subscribe(() => {
+      this.alertService.success('Activity Deleted Successfully')
+    }, err => {
+      this.alertService.error(err);
+    });
   }
 
   ngOnDestroy() {
