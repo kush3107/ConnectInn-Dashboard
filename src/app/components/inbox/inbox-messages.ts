@@ -101,7 +101,7 @@ export class InboxMessagesComponent implements OnDestroy, OnInit {
     });
 
     this.formGroup = new FormGroup({
-      message: new FormControl(null, []);
+      message: new FormControl(null, [])
     })
   }
 
