@@ -195,7 +195,7 @@ export class ConnectInnService {
 
   listMyActivities(): Observable<Activity[] | {}> {
     this.store.dispatch(new ActivityIndexRequestAction());
-    return this.get('/activities').map(res => {
+    return this.get('/activities?include=owner,members').map(res => {
       const activities = res.json().data;
       this.store.dispatch(new ActivityIndexSuccessAction(activities));
 

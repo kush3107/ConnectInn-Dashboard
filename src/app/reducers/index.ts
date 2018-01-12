@@ -59,6 +59,7 @@ export const isUserUpdating = createSelector(getUserState, fromUser.isUpdating);
 
 // Activity Related selectors from activity state
 export const getMyActivities = createSelector(getActivityState, fromActivity.getActivities);
+export const getMyactivitiesEntities = createSelector(getActivityState, fromActivity.getEntities);
 export const getMyActivitiesLoading = createSelector(getActivityState, fromActivity.getLoading);
 export const getMyActivitiesLoaded = createSelector(getActivityState, fromActivity.getLoaded);
 
