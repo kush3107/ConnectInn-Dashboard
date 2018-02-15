@@ -1,10 +1,9 @@
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule, MatMenuModule,
-  MatProgressSpinnerModule, MatSnackBarModule,
-  MatToolbarModule, MatTabsModule, MatSelectModule, MatSidenavModule, MatExpansionModule, MatButtonToggleModule,
-  MatTableModule, MatChipsModule, MatDialogModule, MatSlideToggleModule, MatSliderModule, MatDatepickerModule,
-  MatPaginatorModule, MatSortModule, MatNativeDateModule, MatGridListModule, MatRadioModule, MatProgressBarModule,
-  MatAutocompleteModule,MatTooltipModule
+  MatProgressSpinnerModule, MatSnackBarModule, MatToolbarModule, MatTabsModule, MatSelectModule, MatSidenavModule,
+  MatExpansionModule, MatButtonToggleModule, MatTableModule, MatChipsModule, MatDialogModule, MatSlideToggleModule,
+  MatSliderModule, MatDatepickerModule, MatPaginatorModule, MatSortModule, MatNativeDateModule, MatGridListModule,
+  MatRadioModule, MatProgressBarModule, MatAutocompleteModule, MatTooltipModule, MatListModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {CdkTableModule} from "@angular/cdk/table";
@@ -38,7 +37,8 @@ const modules = [
   MatGridListModule,
   MatRadioModule,
   MatAutocompleteModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatListModule
 ];
 
 @NgModule({
